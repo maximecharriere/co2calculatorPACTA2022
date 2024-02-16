@@ -58,19 +58,9 @@
 #'   \item{heating_distribution_systems}
 #'   \item{insulation_material}
 #'   \item{ventilation_recovery}
-#'   \item{insulation_modern}
+#'   \item{insulation_modern}{Not used}
 #'   \item{insulation_historical}
 #' }
 #' @source BS2, \url{https://www.bs2.ch/}
 #' @source Wüest Partner, \url{https://www.wuestpartner.com/}
 "constants"
-
-
-
-
-
-
-
-
-
-

@@ -3,6 +3,138 @@
 # Calculated parameters (don't edit)
 ##################################################
 
+#' Generate Simple Opaque Building Elements
+#'
+#' `simpleOpaqueElements` generates a list of simple opaque building elements based on the provided
+#' parameters. This includes the roof, floor, and walls of the building, with each element's thermal
+#' properties (U-values) and areas calculated according to the input parameters and predefined constants
+#' within the function. This function is useful for estimating the thermal characteristics of a building's
+#' envelope in a simplified manner.
+#'
+#' @param params A list containing parameters for the building, including:
+#'   \describe{
+#'     \item{uValuesBefore}{A list of U-values for various building elements.}
+#'     \item{area}{Total floor area of the building.}
+#'     \item{floors}{Number of floors in the building.}
+#'   }
+#'
+#' @return A list of lists, where each sublist represents an opaque building element (roof, floor, or walls).
+#'   Each element includes:
+#'   \describe{
+#'     \item{name}{The name of the building element.}
+#'     \item{uValue}{The thermal transmittance (U-value) of the element.}
+#'     \item{area}{The area of the element in square meters.}
+#'     \item{factor}{A factor used in calculations, set to 1 for all elements in this simplified model.}
+#'   }
+#'
+#' @details The function simplifies the calculation by assuming standard building geometries and
+#'   applying fixed ratios for window areas and roof angles. It is intended for preliminary
+#'   assessments and may not substitute detailed thermal modeling.
+#'
+#' @export
+simpleOpaqueElements <- function(params) {
+  uvalues <- params$uValuesBefore
+  areaPerFloor <- params$area / params$floors * constants$buildingGenerator$areaEbfRatio
+  buildingWidth <- min(sqrt(areaPerFloor), constants$buildingGenerator$maxBuildingWidth)
+  buildingLength <- areaPerFloor / buildingWidth
+  buildingHeight <- constants$buildingGenerator$floorHeight * params$floors
+
+  roofArea <- buildingWidth * buildingLength / cos(constants$buildingGenerator$roofAngle * pi / 180)
+  roofAreaOpaque <- roofArea * (1 - constants$buildingGenerator$roofWindowRatio)
+  roof <- list()
+  roof$name <- "Dach"
+  roof$uValue <- uvalues$roof
+  roof$area <- roofAreaOpaque
+  roof$factor <- 1
+
+  floorArea <- buildingWidth * buildingLength
+  floor <- list()
+  floor$name <- "Kellerdecke"
+  floor$uValue <- uvalues$floor
+  floor$area <- floorArea
+  floor$factor <- 1
+
+  wallsArea <- 2 * buildingWidth * buildingHeight + 2 * buildingLength * buildingHeight
+  wallsAreaOpaque <- wallsArea * (1 - constants$buildingGenerator$windowRatio)
+  walls <- list()
+  walls$name <- "Fassade"
+  walls$uValue <- uvalues$walls
+  walls$area <- wallsAreaOpaque
+  walls$factor <- 1
+
+  return(list(roof, floor, walls))
+}
+
+#' Generate Simple Window Elements for a Building
+#'
+#' `simpleWindowElements` calculates and generates a list of window elements for a building based on provided
+#' parameters and predefined constants. This includes roof windows and side windows with specific characteristics
+#' such as orientation, thermal transmittance (U-values), area, and factors affecting light and heat transmission
+#' through the windows. This function is useful for estimating the thermal and lighting characteristics of a
+#' building's window elements in a simplified manner.
+#'
+#' @param params A list containing parameters for the building, including:
+#'   \describe{
+#'     \item{uValuesBefore}{A list of U-values for various building elements before any refurbishment.}
+#'     \item{area}{Total floor area of the building.}
+#'     \item{floors}{Number of floors in the building.}
+#'   }
+#'
+#' @return A list of window elements where each element is a list containing:
+#'   \describe{
+#'     \item{name}{Name of the window element, indicating its type and orientation.}
+#'     \item{orientation}{Orientation of the window ('H' for roof windows, 'S', 'W', 'N', 'E' for side windows).}
+#'     \item{uValue}{The thermal transmittance (U-value) of the window.}
+#'     \item{area}{The area of the window in square meters.}
+#'     \item{opacity}{Light opacity of the window. Constant at 60\% for all windows in this simplified model.}
+#'     \item{frameFactor}{The frame factor, representing the proportion of the window area that is framing. Constant at 70\% for all windows in this simplified model.}
+#'     \item{shadingFactor}{A factor representing the effect of shading devices on the window. Constant at 80\% for all windows in this simplified model.}
+#'   }
+#'
+#' @details The function assumes standard building geometries, applies fixed ratios for window-to-wall area
+#' and roof angles and standard factors for windows properties. It is designed for preliminary assessments and may not substitute detailed thermal or
+#' lighting modeling.
+#'
+#' @export
+simpleWindowElements <- function(params) {
+  uvalues <- params$uValuesBefore
+  areaPerFloor <- params$area / params$floors * constants$buildingGenerator$areaEbfRatio
+  buildingWidth <- min(sqrt(areaPerFloor), constants$buildingGenerator$maxBuildingWidth)
+  buildingLength <- areaPerFloor / buildingWidth
+  buildingHeight <- constants$buildingGenerator$floorHeight * params$floors
+
+  roofArea <- buildingWidth * buildingLength / cos(constants$buildingGenerator$roofAngle * pi / 180)
+  roofWindowArea <- roofArea * constants$buildingGenerator$roofWindowRatio
+  roofwindow <- list()
+  roofwindow$name <- "Dachfenster"
+  roofwindow$orientation <- "H"
+  roofwindow$uValue <- uvalues$windows
+  roofwindow$area <- roofWindowArea
+  roofwindow$opacity <- 0.6
+  roofwindow$frameFactor <- 0.7
+  roofwindow$shadingFactor <- 0.8
+
+  results <- c()
+  results[[1]] <- roofwindow
+  i <- 2
+
+  wallsArea <- 2 * buildingWidth * buildingHeight + 2 * buildingLength * buildingHeight
+  windowArea <- wallsArea * constants$buildingGenerator$windowRatio
+  for (orientation in c("S", "W", "N", "E")) {
+    result <- list()
+    result$name <- paste("Fenster ", orientation)
+    result$orientation <- orientation
+    result$uValue <- uvalues$windows
+    result$area <- windowArea / 4
+    result$opacity <- 0.6
+    result$frameFactor <- 0.7
+    result$shadingFactor <- 0.8
+    results[[i]] <- result
+    i <- i + 1
+  }
+  return(results)
+}
+
 getParams <- function(Inputs) {
   params <- Inputs
 
@@ -65,5 +197,273 @@ getParams <- function(Inputs) {
   ### Heat capacity
   params$heatcapacity <- 0.3
 
+  return(params)
+}
+
+#' Gather and Validate Parameters for CO2 Emission Calculations
+#'
+#' This function validates the input parameters and prepare the \code{input_args} list for further processing .
+#' by the \code{\link{getParams}} function. It ensures that all mandatory parameters are present and
+#' correctly formatted, and it collects information about any refurbishments that have been carried out.
+#'
+#' @param area Mandatory, numeric. Area (in square meters) where heating or cooling is required ("Energiebezugsfläche").
+#'   \itemize{
+#'     \item{e.g. 1000}
+#'   }
+#' @param floors Mandatory, numeric. Number of floors within the building envelope ("thermische Gebäudehülle").
+#'   \itemize{
+#'     \item{e.g. 4}
+#'   }
+#' @param year Mandatory, numeric. Year of building construction.
+#'   \itemize{
+#'     \item{e.g. 1981}
+#'   }
+#' @param utilisation_key Mandatory, numeric. Main utilisation of the building according to SIA 380/1:2009.
+#'
+#'   The following utilisations are possible:
+#'   \itemize{
+#'     \item{1: Wohnen Mehrfamilienhaus}
+#'     \item{2: Wohnen Einfamilienhaus}
+#'     \item{3: Büro}
+#'     \item{4: Schulen}
+#'     \item{5: Verkauf}
+#'     \item{6: Restaurants}
+#'     \item{7: Versammlungslokale}
+#'     \item{8: Spitäler}
+#'     \item{9: Industrie}
+#'     \item{10: Lager}
+#'     \item{11: Sportbauten}
+#'     \item{12: Hallenbäder}
+#'   }
+#'   Check the full dataset using \code{utilisation}.
+#' @param climate_code Mandatory, string. Abbreviation code of the assigned climate station according to "Auszug aus Merkblatt SIA 2028:2015".
+#'
+#'   The following climate stations are available:
+#'   \itemize{
+#'     \item{ABO: Adelboden}
+#'     \item{AIG: Aigle}
+#'     \item{ALT: Altdorf}
+#'     \item{BAS: Basel-Binningen}
+#'     \item{BER: Bern-Liebefeld}
+#'     \item{BUS: Buchs-Aarau}
+#'     \item{CDF: La Chaux-de-Fonds}
+#'     \item{CHU: Chur}
+#'     \item{DAV: Davos}
+#'     \item{DIS: Disentis}
+#'     \item{ENG: Engelberg}
+#'     \item{FRE: La Frétaz}
+#'     \item{GLA: Glarus}
+#'     \item{GSB: Grand-St-Bernard}
+#'     \item{GUT: Güttingen}
+#'     \item{GVE: Genève-Cointrin}
+#'     \item{INT: Interlaken}
+#'     \item{KLO: Zürich-Kloten}
+#'     \item{LUG: Lugano}
+#'     \item{LUZ: Luzern}
+#'     \item{MAG: Magadino}
+#'     \item{MVE: Montana}
+#'     \item{NEU: Neuchâtel}
+#'     \item{OTL: Locarno-Monti}
+#'     \item{PAY: Payerne}
+#'     \item{PIO: Piotta}
+#'     \item{PUY: Pully}
+#'     \item{ROB: Robbia}
+#'     \item{RUE: Rünenberg}
+#'     \item{SAM: Samedan}
+#'     \item{SBE: San Bernardino}
+#'     \item{SCU: Scuol}
+#'     \item{SHA: Schaffhausen}
+#'     \item{SIO: Sion}
+#'     \item{SMA: Zürich-MeteoSchweiz}
+#'     \item{STG: St. Gallen}
+#'     \item{ULR: Ulrichen}
+#'     \item{VAD: Vaduz}
+#'     \item{WYN: Wynau}
+#'     \item{ZER: Zermatt}
+#'   }
+#'   Check the full dataset using \code{climate}.
+#' @param energy_carrier Mandatory, string. Energy carrier used for heating and domestic hot water production.
+#'
+#'   The following energy carriers are available:
+#'   \itemize{
+#'     \item{oilHeating}
+#'     \item{gasHeating}
+#'     \item{other}
+#'   }
+#' @param walls_refurb_year Optional, numeric, default value \code{NULL}. Year of wall refurbishment.
+#'   \itemize{
+#'     \item{e.g. 2010}
+#'   }
+#'   Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.
+#' @param roof_refurb_year Optional, numeric, default value \code{NULL}. Year of roof refurbishment.
+#'   \itemize{
+#'     \item{e.g. 2010}
+#'   }
+#'   Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.
+#' @param windows_refurb_year Optional, numeric, default value \code{NULL}. Year of window refurbishment.
+#'   \itemize{
+#'     \item{e.g. 2010}
+#'   }
+#'   Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.
+#' @param floor_refurb_year Optional, numeric, default value \code{NULL}. Year of basement floor refurbishment.
+#'   \itemize{
+#'     \item{e.g. 2010}
+#'   }
+#'   Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.
+#' @param heating_install_year Optional, numeric, default value \code{NULL}. Year of heating installation.
+#'   \itemize{
+#'     \item{e.g. 2010}
+#'   }
+#'   Supply \code{NULL} or \code{NA} if no heating replacement has taken place since the year of building construction.
+#'
+#' @return A list containing all validated and formatted input parameters, including any
+#'   refurbishment details.
+#'
+#' @examples
+#' params <- get_parameters(
+#'   area = 1000,
+#'   floors = 5,
+#'   year = 1980,
+#'   utilisation_key = 3,
+#'   climate_code = "ZER",
+#'   energy_carrier = "gasHeating",
+#'   walls_refurb_year = 2010,
+#'   roof_refurb_year = 2015
+#' )
+#'
+#' @export
+get_parameters <- function(area, floors, year, utilisation_key, climate_code, energy_carrier, walls_refurb_year = NULL, roof_refurb_year = NULL, windows_refurb_year = NULL, floor_refurb_year = NULL, heating_install_year = NULL) {
+  input_args <- list()
+  input_args_refurbishments <- list()
+
+  # Validate input arguments
+  if (missing(area)) {
+    stop("Mandatory parameter 'area' is missing")
+  } else if (is.null(area)) {
+    stop("Mandatory parameter 'area' is NULL")
+  } else if (is.na(area)) {
+    stop("Mandatory parameter 'area' is NA")
+  } else if (is.numeric(area) & area > 0) {
+    input_args$area <- area
+  } else {
+    stop(paste("Invalid parameter 'area' -->", area))
+  }
+
+  if (missing(floors)) {
+    stop("Mandatory parameter 'floors' is missing")
+  } else if (is.null(floors)) {
+    stop("Mandatory parameter 'floors' is NULL")
+  } else if (is.na(floors)) {
+    stop("Mandatory parameter 'floors' is NA")
+  } else if (is.numeric(floors) & floors > 0) {
+    input_args$floors <- floors
+  } else {
+    stop(paste("Invalid parameter 'floors' -->", floors))
+  }
+
+  if (missing(year)) {
+    stop("Mandatory parameter 'year' is missing")
+  } else if (is.null(year)) {
+    stop("Mandatory parameter 'year' is NULL")
+  } else if (is.na(year)) {
+    stop("Mandatory parameter 'year' is NA")
+  } else if (is.numeric(year) & year > 0) {
+    input_args$year <- year
+  } else {
+    stop(paste("Invalid parameter 'year' -->", year))
+  }
+
+  if (missing(utilisation_key)) {
+    stop("Mandatory parameter 'utilisation_key' is missing")
+  } else if (is.null(utilisation_key)) {
+    stop("Mandatory parameter 'utilisation_key' is NULL")
+  } else if (is.na(utilisation_key)) {
+    stop("Mandatory parameter 'utilisation_key' is NA")
+  } else if (is.numeric(utilisation_key) & utilisation_key %in% unlist(lapply(utilisation, "[[", "key"))) {
+    input_args$utilisation_key <- utilisation_key
+  } else {
+    stop(paste("Invalid parameter 'utilisation_key' -->", utilisation_key))
+  }
+
+  if (missing(climate_code)) {
+    stop("Mandatory parameter 'climate_code' is missing")
+  } else if (is.null(climate_code)) {
+    stop("Mandatory parameter 'climate_code' is NULL")
+  } else if (is.na(climate_code)) {
+    stop("Mandatory parameter 'climate_code' is NA")
+  } else if (is.character(climate_code) & climate_code %in% unlist(lapply(climate, "[[", "code"))) {
+    input_args$climate_code <- climate_code
+  } else {
+    stop(paste("Invalid parameter 'climate_code' -->", climate_code))
+  }
+
+  if (missing(energy_carrier)) {
+    stop("Mandatory parameter 'energy_carrier' is missing")
+  } else if (is.null(energy_carrier)) {
+    stop("Mandatory parameter 'energy_carrier' is NULL")
+  } else if (is.na(energy_carrier)) {
+    stop("Mandatory parameter 'energy_carrier' is NA")
+  } else if (is.character(energy_carrier) & energy_carrier %in% c("oilHeating", "gasHeating", "other")) {
+    input_args$energy_carrier <- energy_carrier
+  } else {
+    stop(paste("Invalid parameter 'energy_carrier' -->", energy_carrier))
+  }
+
+  if (!is.null(walls_refurb_year)) {
+    if (!is.na(walls_refurb_year)) {
+      if (is.numeric(walls_refurb_year) & walls_refurb_year > 0) {
+        input_args_refurbishments <- append(input_args_refurbishments, list(list(measure = "walls", year = walls_refurb_year)))
+      } else {
+        stop(paste("Invalid parameter 'walls_refurb_year' -->", walls_refurb_year))
+      }
+    }
+  }
+
+  if (!is.null(roof_refurb_year)) {
+    if (!is.na(roof_refurb_year)) {
+      if (is.numeric(roof_refurb_year) & roof_refurb_year > 0) {
+        input_args_refurbishments <- append(input_args_refurbishments, list(list(measure = "roof", year = roof_refurb_year)))
+      } else {
+        stop(paste("Invalid parameter 'roof_refurb_year' -->", roof_refurb_year))
+      }
+    }
+  }
+
+  if (!is.null(windows_refurb_year)) {
+    if (!is.na(windows_refurb_year)) {
+      if (is.numeric(windows_refurb_year) & windows_refurb_year > 0) {
+        input_args_refurbishments <- append(input_args_refurbishments, list(list(measure = "windows", year = windows_refurb_year)))
+      } else {
+        stop(paste("Invalid parameter 'windows_refurb_year' -->", windows_refurb_year))
+      }
+    }
+  }
+
+  if (!is.null(floor_refurb_year)) {
+    if (!is.na(floor_refurb_year)) {
+      if (is.numeric(floor_refurb_year) & floor_refurb_year > 0) {
+        input_args_refurbishments <- append(input_args_refurbishments, list(list(measure = "floor", year = floor_refurb_year)))
+      } else {
+        stop(paste("Invalid parameter 'floor_refurb_year' -->", floor_refurb_year))
+      }
+    }
+  }
+
+  if (length(input_args_refurbishments) > 0) {
+    input_args$refurbishments <- input_args_refurbishments
+  }
+
+  if (!is.null(heating_install_year)) {
+    if (!is.na(heating_install_year)) {
+      if (is.numeric(heating_install_year) & heating_install_year > 0) {
+        input_args$yearInstalledHeating <- heating_install_year
+      } else {
+        stop(paste("Invalid parameter 'heating_install_year' -->", heating_install_year))
+      }
+    }
+  }
+
+  # Get parameters according to the input arguments
+  params <- getParams(input_args)
   return(params)
 }
