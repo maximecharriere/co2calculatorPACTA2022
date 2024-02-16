@@ -15,7 +15,7 @@ A list with 10 elements, each element containing the parameters of the respectiv
   \item{heating_distribution_systems}
   \item{insulation_material}
   \item{ventilation_recovery}
-  \item{insulation_modern}
+  \item{insulation_modern}{Not used}
   \item{insulation_historical}
 }
 }

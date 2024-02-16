@@ -1,7 +1,7 @@
 Package: co2calculatorPACTA2022
 Type: Package
 Title: Calculate building CO2 emissions (PACTA 2022 version)
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: c(
     person("Thomas", "Wider", email = "thomas.wider@wuestpartner.com", role = c("aut", "cre")),
     person("Marius", "Zumwald", email = "marius.zumwald@wuestpartner.com", role = c("aut")),
@@ -12,7 +12,7 @@ Description: Calculate the CO2 emissions of a building based on the SIA 380/1:20
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.3.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 Imports: utils
