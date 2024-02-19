@@ -3,9 +3,15 @@ template:
   bootstrap: 5
 navbar:
   structure:
-    left:  [intro, explanations, reference]
-    right: [search, github]
+    left:
+    - intro
+    - explanations
+    - reference
+    right:
+    - search
+    - github
   components:
     explanations:
-      text: "Explanations"
+      text: Explanations
       href: articles/explanations.html
+

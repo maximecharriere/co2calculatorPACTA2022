@@ -29,4 +29,5 @@ pkg_install(packages = c(
   , "roxygen2" # Generate documentation
   , "pkgdown" # Generate package website
   , "devtools" # Package development tools
+  , "usethis" # Automate package setup
 ), repos = "https://stat.ethz.ch/CRAN")
