@@ -31,7 +31,7 @@ Pour l'ouvrir en grand: [function_call_diagram.svg](img/function_call_diagram.sv
 # Description des variables
 
 Nom | Unité | Description
---- | --- | ---
+--|--|-----------
 $area$ | $m^2$ | Surface totale du bâtiment (avec étages).
 $emissionsTotal$ | $kg$ | Total annual CO2 emissions.
 $emissionsPerArea$ | $\frac{kg}{m^2}$ | Total annual CO2 emissions per square meter.

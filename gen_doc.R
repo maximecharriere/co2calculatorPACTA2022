@@ -5,5 +5,5 @@ library(pkgdown)
 library(usethis)
 devtools::document() # Equivalent to roxygenize(), also updates documents
 devtools::install() # Install the package to your R library
-# pkgdown::build_site()
-use_pkgdown_github_pages()
+pkgdown::build_site()
+# use_pkgdown_github_pages()
