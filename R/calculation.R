@@ -8,21 +8,21 @@ Q_Total_Sum <- function(params) {
   return(sum(Q_Total(params)))
 }
 
-Q_DHW_Demand_Sum <- function(params) {
-  return(sum(Q_DHW_Demand(params)))
-}
+# Q_DHW_Demand_Sum <- function(params) {
+#   return(sum(Q_DHW_Demand(params)))
+# }
 
-Q_Losses_Total_Sum <- function(params) {
-  return(sum(Q_Losses_Total(params)))
-}
+# Q_Losses_Total_Sum <- function(params) {
+#   return(sum(Q_Losses_Total(params)))
+# }
 
-Q_Gains_Used_Sum <- function(params) {
-  return(sum(Q_Gains_Used(params)))
-}
+# Q_Gains_Used_Sum <- function(params) {
+#   return(sum(Q_Gains_Used(params)))
+# }
 
-Q_Heating_Demand_Sum <- function(params) {
-  return(sum(Q_Heating_Demand(params)))
-}
+# Q_Heating_Demand_Sum <- function(params) {
+#   return(sum(Q_Heating_Demand(params)))
+# }
 
 #' Calculate Transmission Losses for Building Elements
 #'
@@ -33,7 +33,7 @@ Q_Heating_Demand_Sum <- function(params) {
 #' factor that adjusts the loss calculation.
 #'
 #' @param outsideTemp Numeric, the outside temperature in degrees Celsius.
-#' @param params A list containing parameters and characteristics of the building. This list must include
+#' @param params A list returned by the \code{\link{get_parameters}} function. This list must include
 #'   `utilisation`, `opaqueElements`, and `windowElements`, where:
 #'   \describe{
 #'     \item{utilisation}{The database with information specific to each building utilisation.}
@@ -78,11 +78,22 @@ calculateTransmissionLosses <- function(outsideTemp, params) {
   return(result)
 }
 
-# TODO
+#' Calculate Total Monthly Heat Demand
+#'
+#' `Q_Total` computes the total monthly heat demand for a building, combining both the heating demand 
+#' for space heating and the domestic hot water (DHW) demand.
+#'
+#' @param params A list returned by the \code{\link{get_parameters}} function.
+#'
+#' @return A numeric vector of length 12, representing the total heat demand for each month, measured in 
+#'   megajoules per square meter (MJ/m²). The result reflects the sum of space heating demand and DHW 
+#'   demand for each month, accounting for seasonal variations in energy requirements.
+#'
+#' @export
 Q_Total <- function(params) {
   dhwDemand <- Q_DHW_Demand(params) # vector
-  heatingdemand <- Q_Heating_Demand(params) # vector
-  result <- heatingdemand + dhwDemand # vector
+  heatingDemand <- Q_Heating_Demand(params) # vector
+  result <- heatingDemand + dhwDemand # vector
   return(result)
 }
 
@@ -107,22 +118,16 @@ Q_DHW_Demand <- function(params) {
 
 #' Calculate Monthly Transmission Heat Losses in MJ/m2
 #'
+#' The function applies formulas 76-96 of the SIA 380/1 norm, and aligns with varaible `Q_T`. \cr
 #' `Q_Losses_Transmission` calculates the heat transmission losses through the building envelope for each month,
-#' converting the results into megajoules per square meter (MJ/m2). The function applies formulas 76-96 of the SIA 380/1 norm,
-#' to assess losses based on varying outside temperatures throughout the year. It utilizes the
+#' converting the results into megajoules per square meter (MJ/m2). It assess losses based on varying outside temperatures throughout the year. It utilizes the
 #' \code{\link{calculateTransmissionLosses}} function to compute losses for each building element (opaque and window elements),
 #' then aggregates these losses to provide a monthly total.
 #'
-#' @param params A list containing building parameters and climate data, including:
-#'   \describe{
-#'     \item{area}{The total area of the building in square meters.}
-#'     \item{climate}{The database with the local climate info.}
-#'     \item{Other parameters required by \code{\link{calculateTransmissionLosses}}, such as the `utilisation` database, `opaqueElements`, and `windowElements`.}
-#'   }
+#' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
 #' @return A numeric vector of length 12, representing the total transmission heat losses for each month,
 #'   expressed in MJ/m2. Negative loss values are set to 0 to ensure that all output values represent actual heat losses.
-#'   This result aligns with `Q_T` as referred to in Formula 76-96 of the SIA 380/1 norm.
 #'
 #' @export
 Q_Losses_Transmission <- function(params) {
@@ -158,21 +163,16 @@ Q_Losses_Transmission <- function(params) {
 
 #' Calculate Monthly Ventilation Heat Losses in MJ/m2
 #'
+#' The function applies formulas 97-98 of the SIA 380/1 norm, and aligns with varaible `Q_V`. \cr
 #' `Q_Losses_Ventilation` calculates the heat losses due to ventilation for each month,
-#' expressed in megajoules per square meter (MJ/m2). The calculation is based on Formulas 97-98
-#' of the SIA 380/1 norm, taking into account the difference between indoor and outdoor temperatures,
+#' expressed in megajoules per square meter (MJ/m2). It takes into account the difference between indoor and outdoor temperatures,
 #' the building's ventilation rate, and the specific heat capacity of air at a given altitude.
 #'
-#' @param params A list containing building parameters and climate data, including:
-#'   \describe{
-#'     \item{utilisation}{The database with information specific to each building utilisation.}
-#'     \item{climate}{The database with the local climate info.}
-#'   }
+#' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
 #' @return A numeric vector of length 12, representing the ventilation heat losses for each month,
 #'   expressed in MJ/m2. Negative loss values are automatically set to 0 to ensure that all output values
-#'   represent actual heat losses. This result aligns with `Q_V` as referred
-#'   to in Formula 97-98 of the SIA 380/1 norm.
+#'   represent actual heat losses. 
 #'
 #' @export
 Q_Losses_Ventilation <- function(params) {
@@ -189,21 +189,19 @@ Q_Losses_Ventilation <- function(params) {
 
 #' Calculate Total Monthly Heat Losses
 #'
-#' `Q_Losses_Total`, based on Formula 99 of the SIA 380/1 norm, calculates the total monthly heat losses
+#' The function applies formula 99 of the SIA 380/1 norm, and aligns with varaible `Q_ot`. \cr
+#' `Q_Losses_Total` calculates the total monthly heat losses
 #' per square meter of the building. This function combines heat losses due to transmission
 #' (\code{\link{Q_Losses_Transmission}}) and ventilation (\code{\link{Q_Losses_Ventilation}}),
 #' providing a comprehensive view of the building's overall heat loss. The calculation reflects
 #' the sum of these two components, giving an estimate of the total energy loss through the building
 #' envelope and due to air exchange.
 #'
-#' @param params A list returned by the \code{\link{get_parameters}} function, containing
-#'   all necessary details for the calculation of total heat losses. This includes building
-#'   characteristics, climate data, and specifications of the building's envelope and ventilation system.
+#' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
 #' @return A numeric vector of length 12, representing the total heat losses for each month,
 #'   measured in megajoules (MJ) per square meter. Each element corresponds to one month of the year,
-#'   illustrating the seasonal fluctuation in heat losses. This result aligns with `Q_ot` as referred
-#'   to in Formula 99 of the SIA 380/1 norm.
+#'   illustrating the seasonal fluctuation in heat losses.
 #'
 #' @export
 Q_Losses_Total <- function(params) {
@@ -213,31 +211,65 @@ Q_Losses_Total <- function(params) {
   return(result)
 }
 
-# Returns array of monthly values in MJ/m2
-# Q_iEl
-# Formula (101)
-# TODO
+#' Calculate Monthly Electrical Heat Gains
+#'
+# The function applies formula 101 of the SIA 380/1 norm, and aligns with varaible `Q_iEl`.\cr
+#' `Q_Gains_Electricity` computes the monthly heat gains from electrical equipment and appliances 
+#' within a building, expressed in megajoules per square meter (MJ/m²).
+#'
+#' @param params A list returned by the \code{\link{get_parameters}} function.
+#'
+#' @return A numeric vector of length 12, representing the electrical heat gains for each month, 
+#'   calculated based on the building's annual electricity use and the electricity use factor. 
+#'   The gains are normalized to the building's area and adjusted for the number of days in each month, 
+#'   providing a monthly breakdown of heat gains from electrical sources.
+#'
+#' @export
 Q_Gains_Electricity <- function(params) {
   # Electric gains in MJ/m2
   result <- params$utilisation$electricityUse * params$utilisation$electricityUseFactor * DAYSINMONTH / 365
   return(result)
 }
 
-# Returns array of monthly values in MJ/m2
-# Q_iP
-# Formula (102)
-# TODO
+#' Calculate Monthly Body Heat Gains
+#'
+#' The function applies formula 102 of the SIA 380/1 norm, and aligns with varaible `Q_iP`.\cr
+#' `Q_Gains_BodyHeat` estimates the monthly heat gains attributed to occupants within a building, 
+#' expressed in megajoules per square meter (MJ/m²). This function calculates the heat generated 
+#' by the human body, considering the time spent by a person in the building, their heat emission rate, and 
+#' the occupied area.
+#' 
+#' @param params A list returned by the \code{\link{get_parameters}} function.
+#'
+#' @return A numeric vector of length 12, representing the heat gains from occupants for each month,
+#'   calculated based on the heat emission rate per person, the density of occupants, and the total 
+#'   occupied area. The gains are normalized to the building's area and adjusted for the number of days 
+#'   in each month, providing a monthly breakdown of body heat contributions to the building's internal gains.
+#'
+#' @export
 Q_Gains_BodyHeat <- function(params) {
   result <- params$utilisation$personHeat * params$utilisation$personPresence * DAYSINMONTH * 60 * 60 / params$utilisation$personArea / (1000000)
   return(result)
 }
 
-# Returns array of months containing values for each element in MJ/m2
-# Q_sX
-# Formula (104) ... (108)
-# TODO
+#' Calculate Monthly Solar Heat Gains
+#'
+#' The function applies formula 104 to 109 of the SIA 380/1 norm, and aligns with varaible `Q_sX` and `Q_s`. \cr
+#' `Q_Gains_Solar` estimates the solar heat gains through windows for each month, expressed in 
+#' megajoules per square meter (MJ/m²). It calculates the solar gains by considering the 
+#' orientation, area, and specific properties of each window element, along with the monthly solar 
+#' irradiation. The calculation accounts for factors such as the window's opacity, frame factor, and 
+#' shading factor, normalizing the gains to the building's area.
+#' 
+#' @param params A list returned by the \code{\link{get_parameters}} function.
+#'
+#' @return A numeric vector of length 12, representing the total solar heat gains for each month, 
+#'   calculated for the entire building and normalized per square meter. Each element of the vector 
+#'   corresponds to one month, reflecting the impact of solar irradiation variability throughout the year.
+#'
+#' @export
 Q_Gains_Solar <- function(params) {
-  result <- list()
+  solargains_el <- list()
   i <- 1
   for (iMonth in 1:12) {
     elements <- list()
@@ -249,45 +281,60 @@ Q_Gains_Solar <- function(params) {
       elements[[i]] <- newel
       i <- i + 1
     }
-    result[[iMonth]] <- elements
+    solargains_el[[iMonth]] <- elements
   }
-  return(result)
-}
 
-# Returns array of monthly values in MJ/m2
-# Q_s
-# Formula (109)
-# TODO
-Q_Gains_Solar_Sum <- function(params) {
-  solargains <- Q_Gains_Solar(params)
-
-  result <- c()
+  # Sum up gains of all elements
+  # Formula (109) Variable Q_s
+  solargains <- c()
   for (iMonth in 1:12) {
-    # Sum up losses of all elements
     total <- 0
-    for (g in solargains[[iMonth]]) {
+    for (g in solargains_el[[iMonth]]) {
       total <- g$gains + total
     }
-    result[iMonth] <- total
+    solargains[iMonth] <- total
   }
-  return(result)
+  return(solargains)
 }
 
-# Returns array of monthly values in MJ/m2
-# Q_g
-# Formula (110)
-# TODO
+#' Calculate Total Monthly Heat Gains
+#'
+# The function applies formula 110 of the SIA 380/1 norm, and aligns with varaible `Q_g`.\cr
+#' `Q_Gains_Total` aggregates the total heat gains within a building per square meter, 
+#' combining electrical gains, body heat gains, and solar gains.
+#'
+#' @param params A list returned by the \code{\link{get_parameters}} function.
+#'
+#' @return A numeric vector of length 12, representing the total heat gains for each month,
+#'   measured in megajoules per square meter (MJ/m²).
+#'
+#' @export
 Q_Gains_Total <- function(params) {
   electricgains <- Q_Gains_Electricity(params)
   bodygains <- Q_Gains_BodyHeat(params)
-  solargains <- Q_Gains_Solar_Sum(params)
+  solargains <- Q_Gains_Solar(params)
   result <- electricgains + bodygains + solargains
   return(result)
 }
 
-# H
-# Formula (100)
-# TODO
+#' Calculate Building's Heat Transfer Coefficient
+#'
+#' The function applies formula 100 of the SIA 380/1 norm, and aligns with varaible `H`.\cr
+#' `Heat_Transfer_Coefficient` computes the overall heat transfer coefficient of a building. 
+#' This coefficient is a measure of the building's ability to 
+#' transfer heat through its envelope, including both opaque elements (walls, roof, floor) 
+#' and the effect of ventilation. The calculation takes into account the U-values of the 
+#' building elements, their areas, and any adjustment factors, as well as the impact of 
+#' ventilation based on the building's volume and the specific heat capacity of air at the 
+#' building's altitude.
+#'
+#' @param params A list returned by the \code{\link{get_parameters}} function.
+#'
+#' @return Numeric. The overall heat transfer coefficient of the building, expressed in Watts per degree 
+#'   Celsius (W/°C). This value provides a comprehensive measure of the building's thermal 
+#'   transmittance, incorporating both conduction through the envelope and convection via ventilation.
+#'
+#' @export
 Heat_Transfer_Coefficient <- function(params) {
   result <- 0
   for (el in params$opaqueElements) {
@@ -303,13 +350,26 @@ Heat_Transfer_Coefficient <- function(params) {
   return(result)
 }
 
-# Returns array of monthly values in MJ/m2
-# Q_ug
-# Formula (115)
-# TODO
+#' Calculate Utilized Monthly Heat Gains
+#'
+#' The function applies formulas 111-115 of the SIA 380/1 norm, and aligns with varaible `Q_ug`.\cr
+#' `Q_Gains_Used` computes the amount of heat gains that are effectively used within the building, 
+#' taking into account the total potential heat gains (from both internal and external sources) 
+#' and the building's ability to utilize these gains, based on its thermal characteristics.
+#'
+#' @param params A list returned by the \code{\link{get_parameters}} function.
+#'
+#' @return A numeric vector of length 12, representing the utilized heat gains for each month,
+#'   measured in megajoules (MJ) per square meter. The calculation adjusts for the building's 
+#'   thermal response, ensuring that the reported gains are those that effectively contribute 
+#'   to reducing the heating demand. Each element corresponds to one month of the year, 
+#'   reflecting the variability of heat gains utilization across different seasons.
+#'
+#' @export
 Q_Gains_Used <- function(params) {
   result <- c()
   # Formula (112)
+  # `timeconst` represents the time constant of the building, which is a measure of how quickly the building responds to changes in external temperature. The time constant gives an indication of the time it takes for the building to react to temperature differences, affecting how heat gains are utilized over time. The resulting timeconst is in hours, reflecting how long it takes for the building to equilibrate to a new steady-state temperature after a change in heat gains or losses. A larger timeconst indicates a building with high thermal mass that reacts slowly to temperature changes.
   timeconst <- params$heatcapacity * params$area * 1000000 / Heat_Transfer_Coefficient(params) / 3600
   # Formula (113)
   utilisationparam <- params$utilisation$heatgainsFactor + (timeconst / params$utilisation$heatgainsTime)
@@ -333,28 +393,25 @@ Q_Gains_Used <- function(params) {
 
 #' Calculate Monthly Heating Energy Demand
 #'
+#' The function applies formula 117 of the SIA 380/1 norm, and aligns with varaible `Q_h`.\cr
 #' `Q_Heating_Demand` computes the net energy demand for heating on a monthly basis,
-#' per square meter of the building, as outlined in Formula 117 of the SIA 380/1 norm.
-#' This function calculates the heating demand (`Q_h` in the formula) by assessing the
+#' per square meter of the building.
+#' This function calculates the heating demand by assessing the
 #' difference between total heat losses and gains. It utilizes \code{\link{Q_Losses_Total}}
-#' for total heat losses and \code{\link{Q_Gains_Used}} for usable heat gains, following
-#' the methodology specified by the SIA 380/1 norm.
+#' for total heat losses and \code{\link{Q_Gains_Used}} for usable heat gains.
 #'
-#' @param params A list returned by the \code{\link{get_parameters}} function,
-#'   containing all necessary details for the calculation of heating demand,
-#'   including building characteristics, climate data, and energy system parameters.
+#' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
 #' @return A numeric vector of length 12, representing the net heating energy demand
 #'   for each month, measured in megajoules (MJ) per square meter. Each element of
 #'   the vector corresponds to one month of the year, providing a detailed view of
-#'   the heating demand's seasonal variation. This value corresponds to `Q_h` as
-#'   referred to in Formula 117 of the SIA 380/1 norm.
+#'   the heating demand's seasonal variation.
 #'
 #' @export
 Q_Heating_Demand <- function(params) {
-  totallosses <- Q_Losses_Total(params)
-  totalgains <- Q_Gains_Used(params)
-  result <- totallosses - totalgains
+  totalLosses <- Q_Losses_Total(params)
+  usedGains <- Q_Gains_Used(params)
+  result <- totalLosses - usedGains
   return(result) # vector of 12 months
 }
 
@@ -366,11 +423,7 @@ Q_Heating_Demand <- function(params) {
 #' the emission coefficient accordingly. The calculation is based on the total energy demand as estimated
 #' by the `Q_Total_Sum` function and applies conversion factors to translate energy use into GHG emissions.
 #'
-#' @param params A list containing the parameters of the building and its energy system.
-#'   This includes the area of the building, the year of construction, details of the energy carrier,
-#'   and information about the heating system. The list is expected to have specific structure and fields
-#'   as defined by the package's data model, including `yearInstalledHeating`, `energy_carrier`, `area`,
-#'   and `year`.
+#' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
 #' @return \code{getEmissions} returns a list \code{r} containing the calculation results:
 #'   \itemize{
@@ -383,7 +436,6 @@ Q_Heating_Demand <- function(params) {
 #' @export
 getEmissions <- function(params) {
   energyCarrier <- constants[[params$energy_carrier]]
-  emissionCoefficient <- energyCarrier$ghgEmissionsPerMJth
 
   # if yearInstalledHeating is NULL or NA, derive from building construction year
   if (is.null(params$yearInstalledHeating) || is.na(params$yearInstalledHeating)) {
@@ -406,7 +458,7 @@ getEmissions <- function(params) {
     } else {
       efficiencyCoefficent <- energyCarrier$efficiencyCoefficient$`>2009`
     }
-    emissionCoefficient <- round(emissionCoefficient / efficiencyCoefficent, 4)
+    emissionCoefficient <- round(energyCarrier$ghgEmissionsPerMJth / efficiencyCoefficent, 4)
   } else {
     emissionCoefficient <- 0
   }

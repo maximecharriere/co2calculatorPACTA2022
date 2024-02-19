@@ -9,7 +9,7 @@ calculateTransmissionLosses(outsideTemp, params)
 \arguments{
 \item{outsideTemp}{Numeric, the outside temperature in degrees Celsius.}
 
-\item{params}{A list containing parameters and characteristics of the building. This list must include
+\item{params}{A list returned by the \code{\link{get_parameters}} function. This list must include
 `utilisation`, `opaqueElements`, and `windowElements`, where:
 \describe{
   \item{utilisation}{The database with information specific to each building utilisation.}

@@ -1,0 +1,11 @@
+url: https://maximecharriere.github.io/co2calculatorPACTA2022/
+template:
+  bootstrap: 5
+navbar:
+  structure:
+    left:  [intro, explanations, reference]
+    right: [search, github]
+  components:
+    explanations:
+      text: "Explanations"
+      href: articles/explanations.html

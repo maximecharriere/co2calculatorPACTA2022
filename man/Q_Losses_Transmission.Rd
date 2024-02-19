@@ -7,22 +7,16 @@
 Q_Losses_Transmission(params)
 }
 \arguments{
-\item{params}{A list containing building parameters and climate data, including:
-\describe{
-  \item{area}{The total area of the building in square meters.}
-  \item{climate}{The database with the local climate info.}
-  \item{Other parameters required by \code{\link{calculateTransmissionLosses}}, such as the `utilisation` database, `opaqueElements`, and `windowElements`.}
-}}
+\item{params}{A list returned by the \code{\link{get_parameters}} function.}
 }
 \value{
 A numeric vector of length 12, representing the total transmission heat losses for each month,
   expressed in MJ/m2. Negative loss values are set to 0 to ensure that all output values represent actual heat losses.
-  This result aligns with `Q_T` as referred to in Formula 76-96 of the SIA 380/1 norm.
 }
 \description{
+The function applies formulas 76-96 of the SIA 380/1 norm, and aligns with varaible `Q_T`. \cr
 `Q_Losses_Transmission` calculates the heat transmission losses through the building envelope for each month,
-converting the results into megajoules per square meter (MJ/m2). The function applies formulas 76-96 of the SIA 380/1 norm,
-to assess losses based on varying outside temperatures throughout the year. It utilizes the
+converting the results into megajoules per square meter (MJ/m2). It assess losses based on varying outside temperatures throughout the year. It utilizes the
 \code{\link{calculateTransmissionLosses}} function to compute losses for each building element (opaque and window elements),
 then aggregates these losses to provide a monthly total.
 }

@@ -7,21 +7,16 @@
 Q_Losses_Ventilation(params)
 }
 \arguments{
-\item{params}{A list containing building parameters and climate data, including:
-\describe{
-  \item{utilisation}{The database with information specific to each building utilisation.}
-  \item{climate}{The database with the local climate info.}
-}}
+\item{params}{A list returned by the \code{\link{get_parameters}} function.}
 }
 \value{
 A numeric vector of length 12, representing the ventilation heat losses for each month,
   expressed in MJ/m2. Negative loss values are automatically set to 0 to ensure that all output values
-  represent actual heat losses. This result aligns with `Q_V` as referred
-  to in Formula 97-98 of the SIA 380/1 norm.
+  represent actual heat losses.
 }
 \description{
+The function applies formulas 97-98 of the SIA 380/1 norm, and aligns with varaible `Q_V`. \cr
 `Q_Losses_Ventilation` calculates the heat losses due to ventilation for each month,
-expressed in megajoules per square meter (MJ/m2). The calculation is based on Formulas 97-98
-of the SIA 380/1 norm, taking into account the difference between indoor and outdoor temperatures,
+expressed in megajoules per square meter (MJ/m2). It takes into account the difference between indoor and outdoor temperatures,
 the building's ventilation rate, and the specific heat capacity of air at a given altitude.
 }

@@ -7,11 +7,7 @@
 getEmissions(params)
 }
 \arguments{
-\item{params}{A list containing the parameters of the building and its energy system.
-This includes the area of the building, the year of construction, details of the energy carrier,
-and information about the heating system. The list is expected to have specific structure and fields
-as defined by the package's data model, including `yearInstalledHeating`, `energy_carrier`, `area`,
-and `year`.}
+\item{params}{A list returned by the \code{\link{get_parameters}} function.}
 }
 \value{
 \code{getEmissions} returns a list \code{r} containing the calculation results:
