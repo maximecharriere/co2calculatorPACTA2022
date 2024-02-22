@@ -21,9 +21,9 @@ A list of window elements where each element is a list containing:
 \item{orientation}{Orientation of the window ('H' for roof windows, 'S', 'W', 'N', 'E' for side windows).}
 \item{uValue}{The thermal transmittance (U-value) of the window.}
 \item{area}{The area of the window in square meters.}
-\item{opacity}{Light opacity of the window. Constant at 60\\% for all windows in this simplified model.}
-\item{frameFactor}{The frame factor, representing the proportion of the window area that is framing. Constant at 70\\% for all windows in this simplified model.}
-\item{shadingFactor}{A factor representing the effect of shading devices on the window. Constant at 80\\% for all windows in this simplified model.}
+\item{opacity}{Light opacity of the window. Constant at 0.6 for all windows in this simplified model.}
+\item{frameFactor}{The frame factor, representing the proportion of the window area that is framing. Constant at 0.7 for all windows in this simplified model.}
+\item{shadingFactor}{A factor representing the effect of shading devices on the window. Constant at 0.8 for all windows in this simplified model.}
 }
 }
 \description{
