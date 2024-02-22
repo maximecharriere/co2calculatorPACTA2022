@@ -11,14 +11,14 @@ Q_Gains_BodyHeat(params)
 }
 \value{
 A numeric vector of length 12, representing the heat gains from occupants for each month,
-  calculated based on the heat emission rate per person, the density of occupants, and the total 
-  occupied area. The gains are normalized to the building's area and adjusted for the number of days 
-  in each month, providing a monthly breakdown of body heat contributions to the building's internal gains.
+calculated based on the heat emission rate per person, the density of occupants, and the total
+occupied area. The gains are normalized to the building's area and adjusted for the number of days
+in each month, providing a monthly breakdown of body heat contributions to the building's internal gains.
 }
 \description{
-The function applies formula 102 of the SIA 380/1 norm, and aligns with varaible `Q_iP`.\cr
-`Q_Gains_BodyHeat` estimates the monthly heat gains attributed to occupants within a building, 
-expressed in megajoules per square meter (MJ/m²). This function calculates the heat generated 
-by the human body, considering the time spent by a person in the building, their heat emission rate, and 
+The function applies formula 102 of the SIA 380/1 norm, and aligns with varaible \code{Q_iP}.\cr
+\code{Q_Gains_BodyHeat} estimates the monthly heat gains attributed to occupants within a building,
+expressed in megajoules per square meter (MJ/m²). This function calculates the heat generated
+by the human body, considering the time spent by a person in the building, their heat emission rate, and
 the occupied area.
 }

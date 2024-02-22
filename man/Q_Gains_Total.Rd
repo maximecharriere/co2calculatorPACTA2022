@@ -11,9 +11,9 @@ Q_Gains_Total(params)
 }
 \value{
 A numeric vector of length 12, representing the total heat gains for each month,
-  measured in megajoules per square meter (MJ/m²).
+measured in megajoules per square meter (MJ/m²).
 }
 \description{
-`Q_Gains_Total` aggregates the total heat gains within a building per square meter, 
+\code{Q_Gains_Total} aggregates the total heat gains within a building per square meter,
 combining electrical gains, body heat gains, and solar gains.
 }

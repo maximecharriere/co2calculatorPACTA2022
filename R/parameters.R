@@ -1,4 +1,3 @@
-
 ##################################################
 # Calculated parameters (don't edit)
 ##################################################
@@ -206,130 +205,9 @@ getParams <- function(Inputs) {
 #' by the \code{\link{getParams}} function. It ensures that all mandatory parameters are present and
 #' correctly formatted, and it collects information about any refurbishments that have been carried out.
 #'
-#' @param area Mandatory, numeric. Area (in square meters) where heating or cooling is required ("Energiebezugsfläche").
-#'   \itemize{
-#'     \item{e.g. 1000}
-#'   }
-#' @param floors Mandatory, numeric. Number of floors within the building envelope ("thermische Gebäudehülle").
-#'   \itemize{
-#'     \item{e.g. 4}
-#'   }
-#' @param year Mandatory, numeric. Year of building construction.
-#'   \itemize{
-#'     \item{e.g. 1981}
-#'   }
-#' @param utilisation_key Mandatory, numeric. Main utilisation of the building according to SIA 380/1:2009.
-#'
-#'   The following utilisations are possible:
-#'   \itemize{
-#'     \item{1: Wohnen Mehrfamilienhaus}
-#'     \item{2: Wohnen Einfamilienhaus}
-#'     \item{3: Büro}
-#'     \item{4: Schulen}
-#'     \item{5: Verkauf}
-#'     \item{6: Restaurants}
-#'     \item{7: Versammlungslokale}
-#'     \item{8: Spitäler}
-#'     \item{9: Industrie}
-#'     \item{10: Lager}
-#'     \item{11: Sportbauten}
-#'     \item{12: Hallenbäder}
-#'   }
-#'   Check the full dataset using \code{utilisation}.
-#' @param climate_code Mandatory, string. Abbreviation code of the assigned climate station according to "Auszug aus Merkblatt SIA 2028:2015".
-#'
-#'   The following climate stations are available:
-#'   \itemize{
-#'     \item{ABO: Adelboden}
-#'     \item{AIG: Aigle}
-#'     \item{ALT: Altdorf}
-#'     \item{BAS: Basel-Binningen}
-#'     \item{BER: Bern-Liebefeld}
-#'     \item{BUS: Buchs-Aarau}
-#'     \item{CDF: La Chaux-de-Fonds}
-#'     \item{CHU: Chur}
-#'     \item{DAV: Davos}
-#'     \item{DIS: Disentis}
-#'     \item{ENG: Engelberg}
-#'     \item{FRE: La Frétaz}
-#'     \item{GLA: Glarus}
-#'     \item{GSB: Grand-St-Bernard}
-#'     \item{GUT: Güttingen}
-#'     \item{GVE: Genève-Cointrin}
-#'     \item{INT: Interlaken}
-#'     \item{KLO: Zürich-Kloten}
-#'     \item{LUG: Lugano}
-#'     \item{LUZ: Luzern}
-#'     \item{MAG: Magadino}
-#'     \item{MVE: Montana}
-#'     \item{NEU: Neuchâtel}
-#'     \item{OTL: Locarno-Monti}
-#'     \item{PAY: Payerne}
-#'     \item{PIO: Piotta}
-#'     \item{PUY: Pully}
-#'     \item{ROB: Robbia}
-#'     \item{RUE: Rünenberg}
-#'     \item{SAM: Samedan}
-#'     \item{SBE: San Bernardino}
-#'     \item{SCU: Scuol}
-#'     \item{SHA: Schaffhausen}
-#'     \item{SIO: Sion}
-#'     \item{SMA: Zürich-MeteoSchweiz}
-#'     \item{STG: St. Gallen}
-#'     \item{ULR: Ulrichen}
-#'     \item{VAD: Vaduz}
-#'     \item{WYN: Wynau}
-#'     \item{ZER: Zermatt}
-#'   }
-#'   Check the full dataset using \code{climate}.
-#' @param energy_carrier Mandatory, string. Energy carrier used for heating and domestic hot water production.
-#'
-#'   The following energy carriers are available:
-#'   \itemize{
-#'     \item{oilHeating}
-#'     \item{gasHeating}
-#'     \item{other}
-#'   }
-#' @param walls_refurb_year Optional, numeric, default value \code{NULL}. Year of wall refurbishment.
-#'   \itemize{
-#'     \item{e.g. 2010}
-#'   }
-#'   Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.
-#' @param roof_refurb_year Optional, numeric, default value \code{NULL}. Year of roof refurbishment.
-#'   \itemize{
-#'     \item{e.g. 2010}
-#'   }
-#'   Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.
-#' @param windows_refurb_year Optional, numeric, default value \code{NULL}. Year of window refurbishment.
-#'   \itemize{
-#'     \item{e.g. 2010}
-#'   }
-#'   Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.
-#' @param floor_refurb_year Optional, numeric, default value \code{NULL}. Year of basement floor refurbishment.
-#'   \itemize{
-#'     \item{e.g. 2010}
-#'   }
-#'   Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.
-#' @param heating_install_year Optional, numeric, default value \code{NULL}. Year of heating installation.
-#'   \itemize{
-#'     \item{e.g. 2010}
-#'   }
-#'   Supply \code{NULL} or \code{NA} if no heating replacement has taken place since the year of building construction.
-#'
+#' @param params See \code{\link{calculate_emissions}} for details on the parameters.
 #' @return A list containing all validated and formatted input parameters, including any
 #'   refurbishment details.
-#'
-#' @examples
-#' params <- get_parameters(
-#'   area = 1000,
-#'   floors = 5,
-#'   year = 1980,
-#'   utilisation_key = 3,
-#'   climate_code = "ZER",
-#'   energy_carrier = "gasHeating",
-#'   walls_refurb_year = 2010,
-#'   roof_refurb_year = 2015
-#' )
 #'
 #' @export
 get_parameters <- function(area, floors, year, utilisation_key, climate_code, energy_carrier, walls_refurb_year = NULL, roof_refurb_year = NULL, windows_refurb_year = NULL, floor_refurb_year = NULL, heating_install_year = NULL) {

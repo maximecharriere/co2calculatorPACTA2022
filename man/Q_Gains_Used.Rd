@@ -11,14 +11,14 @@ Q_Gains_Used(params)
 }
 \value{
 A numeric vector of length 12, representing the utilized heat gains for each month,
-  measured in megajoules (MJ) per square meter. The calculation adjusts for the building's 
-  thermal response, ensuring that the reported gains are those that effectively contribute 
-  to reducing the heating demand. Each element corresponds to one month of the year, 
-  reflecting the variability of heat gains utilization across different seasons.
+measured in megajoules (MJ) per square meter. The calculation adjusts for the building's
+thermal response, ensuring that the reported gains are those that effectively contribute
+to reducing the heating demand. Each element corresponds to one month of the year,
+reflecting the variability of heat gains utilization across different seasons.
 }
 \description{
-The function applies formulas 111-115 of the SIA 380/1 norm, and aligns with varaible `Q_ug`.\cr
-`Q_Gains_Used` computes the amount of heat gains that are effectively used within the building, 
-taking into account the total potential heat gains (from both internal and external sources) 
+The function applies formulas 111-115 of the SIA 380/1 norm, and aligns with varaible \code{Q_ug}.\cr
+\code{Q_Gains_Used} computes the amount of heat gains that are effectively used within the building,
+taking into account the total potential heat gains (from both internal and external sources)
 and the building's ability to utilize these gains, based on its thermal characteristics.
 }

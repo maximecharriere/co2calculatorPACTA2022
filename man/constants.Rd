@@ -7,16 +7,16 @@
 \format{
 A list with 10 elements, each element containing the parameters of the respective constant/coefficient:
 \itemize{
-  \item{buildingGenerator}
-  \item{oilHeating}
-  \item{gasHeating}
-  \item{other}
-  \item{dhw_systems}
-  \item{heating_distribution_systems}
-  \item{insulation_material}
-  \item{ventilation_recovery}
-  \item{insulation_modern}{Not used}
-  \item{insulation_historical}
+\item{buildingGenerator}
+\item{oilHeating}
+\item{gasHeating}
+\item{other}
+\item{dhw_systems}
+\item{heating_distribution_systems}
+\item{insulation_material}
+\item{ventilation_recovery}
+\item{insulation_modern}{Not used}
+\item{insulation_historical}
 }
 }
 \source{

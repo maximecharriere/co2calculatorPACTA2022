@@ -11,12 +11,12 @@ Q_Losses_Total(params)
 }
 \value{
 A numeric vector of length 12, representing the total heat losses for each month,
-  measured in megajoules (MJ) per square meter. Each element corresponds to one month of the year,
-  illustrating the seasonal fluctuation in heat losses.
+measured in megajoules (MJ) per square meter. Each element corresponds to one month of the year,
+illustrating the seasonal fluctuation in heat losses.
 }
 \description{
-The function applies formula 99 of the SIA 380/1 norm, and aligns with varaible `Q_ot`. \cr
-`Q_Losses_Total` calculates the total monthly heat losses
+The function applies formula 99 of the SIA 380/1 norm, and aligns with varaible \code{Q_ot}. \cr
+\code{Q_Losses_Total} calculates the total monthly heat losses
 per square meter of the building. This function combines heat losses due to transmission
 (\code{\link{Q_Losses_Transmission}}) and ventilation (\code{\link{Q_Losses_Ventilation}}),
 providing a comprehensive view of the building's overall heat loss. The calculation reflects

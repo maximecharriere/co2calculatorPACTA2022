@@ -10,15 +10,15 @@ Q_Gains_Solar(params)
 \item{params}{A list returned by the \code{\link{get_parameters}} function.}
 }
 \value{
-A numeric vector of length 12, representing the total solar heat gains for each month, 
-  calculated for the entire building and normalized per square meter. Each element of the vector 
-  corresponds to one month, reflecting the impact of solar irradiation variability throughout the year.
+A numeric vector of length 12, representing the total solar heat gains for each month,
+calculated for the entire building and normalized per square meter. Each element of the vector
+corresponds to one month, reflecting the impact of solar irradiation variability throughout the year.
 }
 \description{
-The function applies formula 104 to 109 of the SIA 380/1 norm, and aligns with varaible `Q_sX` and `Q_s`. \cr
-`Q_Gains_Solar` estimates the solar heat gains through windows for each month, expressed in 
-megajoules per square meter (MJ/m²). It calculates the solar gains by considering the 
-orientation, area, and specific properties of each window element, along with the monthly solar 
-irradiation. The calculation accounts for factors such as the window's opacity, frame factor, and 
+The function applies formula 104 to 109 of the SIA 380/1 norm, and aligns with varaible \code{Q_sX} and \code{Q_s}. \cr
+\code{Q_Gains_Solar} estimates the solar heat gains through windows for each month, expressed in
+megajoules per square meter (MJ/m²). It calculates the solar gains by considering the
+orientation, area, and specific properties of each window element, along with the monthly solar
+irradiation. The calculation accounts for factors such as the window's opacity, frame factor, and
 shading factor, normalizing the gains to the building's area.
 }

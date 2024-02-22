@@ -10,17 +10,17 @@ Heat_Transfer_Coefficient(params)
 \item{params}{A list returned by the \code{\link{get_parameters}} function.}
 }
 \value{
-Numeric. The overall heat transfer coefficient of the building, expressed in Watts per degree 
-  Celsius (W/°C). This value provides a comprehensive measure of the building's thermal 
-  transmittance, incorporating both conduction through the envelope and convection via ventilation.
+Numeric. The overall heat transfer coefficient of the building, expressed in Watts per degree
+Celsius (W/°C). This value provides a comprehensive measure of the building's thermal
+transmittance, incorporating both conduction through the envelope and convection via ventilation.
 }
 \description{
-The function applies formula 100 of the SIA 380/1 norm, and aligns with varaible `H`.\cr
-`Heat_Transfer_Coefficient` computes the overall heat transfer coefficient of a building. 
-This coefficient is a measure of the building's ability to 
-transfer heat through its envelope, including both opaque elements (walls, roof, floor) 
-and the effect of ventilation. The calculation takes into account the U-values of the 
-building elements, their areas, and any adjustment factors, as well as the impact of 
-ventilation based on the building's volume and the specific heat capacity of air at the 
+The function applies formula 100 of the SIA 380/1 norm, and aligns with varaible \code{H}.\cr
+\code{Heat_Transfer_Coefficient} computes the overall heat transfer coefficient of a building.
+This coefficient is a measure of the building's ability to
+transfer heat through its envelope, including both opaque elements (walls, roof, floor)
+and the effect of ventilation. The calculation takes into account the U-values of the
+building elements, their areas, and any adjustment factors, as well as the impact of
+ventilation based on the building's volume and the specific heat capacity of air at the
 building's altitude.
 }

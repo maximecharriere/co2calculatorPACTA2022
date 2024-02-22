@@ -11,11 +11,11 @@ Q_Losses_Transmission(params)
 }
 \value{
 A numeric vector of length 12, representing the total transmission heat losses for each month,
-  expressed in MJ/m2. Negative loss values are set to 0 to ensure that all output values represent actual heat losses.
+expressed in MJ/m2. Negative loss values are set to 0 to ensure that all output values represent actual heat losses.
 }
 \description{
-The function applies formulas 76-96 of the SIA 380/1 norm, and aligns with varaible `Q_T`. \cr
-`Q_Losses_Transmission` calculates the heat transmission losses through the building envelope for each month,
+The function applies formulas 76-96 of the SIA 380/1 norm, and aligns with varaible \code{Q_T}. \cr
+\code{Q_Losses_Transmission} calculates the heat transmission losses through the building envelope for each month,
 converting the results into megajoules per square meter (MJ/m2). It assess losses based on varying outside temperatures throughout the year. It utilizes the
 \code{\link{calculateTransmissionLosses}} function to compute losses for each building element (opaque and window elements),
 then aggregates these losses to provide a monthly total.

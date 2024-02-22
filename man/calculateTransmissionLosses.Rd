@@ -10,22 +10,22 @@ calculateTransmissionLosses(outsideTemp, params)
 \item{outsideTemp}{Numeric, the outside temperature in degrees Celsius.}
 
 \item{params}{A list returned by the \code{\link{get_parameters}} function. This list must include
-`utilisation`, `opaqueElements`, and `windowElements`, where:
+\code{utilisation}, \code{opaqueElements}, and \code{windowElements}, where:
 \describe{
-  \item{utilisation}{The database with information specific to each building utilisation.}
-  \item{opaqueElements}{A list of opaque building elements (e.g., walls, roof, floor).}
-  \item{windowElements}{A list of window elements.}
+\item{utilisation}{The database with information specific to each building utilisation.}
+\item{opaqueElements}{A list of opaque building elements (e.g., walls, roof, floor).}
+\item{windowElements}{A list of window elements.}
 }}
 }
 \value{
 A list of elements, where each element is a list containing:
-  \describe{
-    \item{name}{The name of the building element.}
-    \item{losses}{Calculated heat transmission losses through the element in watts.}
-  }
+\describe{
+\item{name}{The name of the building element.}
+\item{losses}{Calculated heat transmission losses through the element in watts.}
+}
 }
 \description{
-`calculateTransmissionLosses` computes the heat transmission losses through opaque and window elements
+\code{calculateTransmissionLosses} computes the heat transmission losses through opaque and window elements
 of a building given the outside temperature and building parameters. This function calculates the losses
 for each element in watts, taking into account the difference between room temperature (adjusted for
 specific utilisation) and outside temperature, the area of each element, its U-value, and an optional

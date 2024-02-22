@@ -7,19 +7,19 @@
 \format{
 A list with 40 elements, each element containing the climate data of the respective station:
 \itemize{
-  \item{name}
-  \item{code}
-  \item{normTemperature}
-  \item{latitude}
-  \item{longitude}
-  \item{altitude}
-  \item{climateCode}
-  \item{situationCode}
-  \item{monthlyTemperatureAvg}
-  \item{monthlyIrradiationSum}
-  \item{PrecipitationSum}
-  \item{mischungsverhaeltnis}
-  \item{absFeuchtigkeit}
+\item{name}
+\item{code}
+\item{normTemperature}
+\item{latitude}
+\item{longitude}
+\item{altitude}
+\item{climateCode}
+\item{situationCode}
+\item{monthlyTemperatureAvg}
+\item{monthlyIrradiationSum}
+\item{PrecipitationSum}
+\item{mischungsverhaeltnis}
+\item{absFeuchtigkeit}
 }
 }
 \source{

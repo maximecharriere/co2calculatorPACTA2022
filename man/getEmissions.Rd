@@ -11,17 +11,17 @@ getEmissions(params)
 }
 \value{
 \code{getEmissions} returns a list \code{r} containing the calculation results:
-  \itemize{
-    \item{r$heatEnergy: annual heat energy required per area, in MJ/m2 per year}
-    \item{r$emissionCoefficient: applied CO2 emission coefficient according to the given energy carrier, in kg/MJ}
-    \item{r$emissionsPerArea: annual CO2 emissions per area, in kg/m2 per year}
-    \item{r$emissionsTotal:  }
-  }
+\itemize{
+\item{r$heatEnergy: annual heat energy required per area, in MJ/m2 per year}
+\item{r$emissionCoefficient: applied CO2 emission coefficient according to the given energy carrier, in kg/MJ}
+\item{r$emissionsPerArea: annual CO2 emissions per area, in kg/m2 per year}
+\item{r$emissionsTotal:  }
+}
 }
 \description{
-`getEmissions` calculates the greenhouse gas (GHG) emissions associated with the energy use of a building,
+\code{getEmissions} calculates the greenhouse gas (GHG) emissions associated with the energy use of a building,
 taking into account the energy carrier, heating efficiency, and total heat energy required.
 The function considers the efficiency of heating systems installed in different periods and adjusts
 the emission coefficient accordingly. The calculation is based on the total energy demand as estimated
-by the `Q_Total_Sum` function and applies conversion factors to translate energy use into GHG emissions.
+by the \code{Q_Total_Sum} function and applies conversion factors to translate energy use into GHG emissions.
 }

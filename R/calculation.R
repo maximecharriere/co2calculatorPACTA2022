@@ -80,13 +80,13 @@ calculateTransmissionLosses <- function(outsideTemp, params) {
 
 #' Calculate Total Monthly Heat Demand
 #'
-#' `Q_Total` computes the total monthly heat demand for a building, combining both the heating demand 
+#' `Q_Total` computes the total monthly heat demand for a building, combining both the heating demand
 #' for space heating and the domestic hot water (DHW) demand.
 #'
 #' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
-#' @return A numeric vector of length 12, representing the total heat demand for each month, measured in 
-#'   megajoules per square meter (MJ/m²). The result reflects the sum of space heating demand and DHW 
+#' @return A numeric vector of length 12, representing the total heat demand for each month, measured in
+#'   megajoules per square meter (MJ/m²). The result reflects the sum of space heating demand and DHW
 #'   demand for each month, accounting for seasonal variations in energy requirements.
 #'
 #' @export
@@ -172,7 +172,7 @@ Q_Losses_Transmission <- function(params) {
 #'
 #' @return A numeric vector of length 12, representing the ventilation heat losses for each month,
 #'   expressed in MJ/m2. Negative loss values are automatically set to 0 to ensure that all output values
-#'   represent actual heat losses. 
+#'   represent actual heat losses.
 #'
 #' @export
 Q_Losses_Ventilation <- function(params) {
@@ -214,14 +214,14 @@ Q_Losses_Total <- function(params) {
 #' Calculate Monthly Electrical Heat Gains
 #'
 # The function applies formula 101 of the SIA 380/1 norm, and aligns with varaible `Q_iEl`.\cr
-#' `Q_Gains_Electricity` computes the monthly heat gains from electrical equipment and appliances 
+#' `Q_Gains_Electricity` computes the monthly heat gains from electrical equipment and appliances
 #' within a building, expressed in megajoules per square meter (MJ/m²).
 #'
 #' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
-#' @return A numeric vector of length 12, representing the electrical heat gains for each month, 
-#'   calculated based on the building's annual electricity use and the electricity use factor. 
-#'   The gains are normalized to the building's area and adjusted for the number of days in each month, 
+#' @return A numeric vector of length 12, representing the electrical heat gains for each month,
+#'   calculated based on the building's annual electricity use and the electricity use factor.
+#'   The gains are normalized to the building's area and adjusted for the number of days in each month,
 #'   providing a monthly breakdown of heat gains from electrical sources.
 #'
 #' @export
@@ -234,16 +234,16 @@ Q_Gains_Electricity <- function(params) {
 #' Calculate Monthly Body Heat Gains
 #'
 #' The function applies formula 102 of the SIA 380/1 norm, and aligns with varaible `Q_iP`.\cr
-#' `Q_Gains_BodyHeat` estimates the monthly heat gains attributed to occupants within a building, 
-#' expressed in megajoules per square meter (MJ/m²). This function calculates the heat generated 
-#' by the human body, considering the time spent by a person in the building, their heat emission rate, and 
+#' `Q_Gains_BodyHeat` estimates the monthly heat gains attributed to occupants within a building,
+#' expressed in megajoules per square meter (MJ/m²). This function calculates the heat generated
+#' by the human body, considering the time spent by a person in the building, their heat emission rate, and
 #' the occupied area.
-#' 
+#'
 #' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
 #' @return A numeric vector of length 12, representing the heat gains from occupants for each month,
-#'   calculated based on the heat emission rate per person, the density of occupants, and the total 
-#'   occupied area. The gains are normalized to the building's area and adjusted for the number of days 
+#'   calculated based on the heat emission rate per person, the density of occupants, and the total
+#'   occupied area. The gains are normalized to the building's area and adjusted for the number of days
 #'   in each month, providing a monthly breakdown of body heat contributions to the building's internal gains.
 #'
 #' @export
@@ -255,16 +255,16 @@ Q_Gains_BodyHeat <- function(params) {
 #' Calculate Monthly Solar Heat Gains
 #'
 #' The function applies formula 104 to 109 of the SIA 380/1 norm, and aligns with varaible `Q_sX` and `Q_s`. \cr
-#' `Q_Gains_Solar` estimates the solar heat gains through windows for each month, expressed in 
-#' megajoules per square meter (MJ/m²). It calculates the solar gains by considering the 
-#' orientation, area, and specific properties of each window element, along with the monthly solar 
-#' irradiation. The calculation accounts for factors such as the window's opacity, frame factor, and 
+#' `Q_Gains_Solar` estimates the solar heat gains through windows for each month, expressed in
+#' megajoules per square meter (MJ/m²). It calculates the solar gains by considering the
+#' orientation, area, and specific properties of each window element, along with the monthly solar
+#' irradiation. The calculation accounts for factors such as the window's opacity, frame factor, and
 #' shading factor, normalizing the gains to the building's area.
-#' 
+#'
 #' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
-#' @return A numeric vector of length 12, representing the total solar heat gains for each month, 
-#'   calculated for the entire building and normalized per square meter. Each element of the vector 
+#' @return A numeric vector of length 12, representing the total solar heat gains for each month,
+#'   calculated for the entire building and normalized per square meter. Each element of the vector
 #'   corresponds to one month, reflecting the impact of solar irradiation variability throughout the year.
 #'
 #' @export
@@ -300,7 +300,7 @@ Q_Gains_Solar <- function(params) {
 #' Calculate Total Monthly Heat Gains
 #'
 # The function applies formula 110 of the SIA 380/1 norm, and aligns with varaible `Q_g`.\cr
-#' `Q_Gains_Total` aggregates the total heat gains within a building per square meter, 
+#' `Q_Gains_Total` aggregates the total heat gains within a building per square meter,
 #' combining electrical gains, body heat gains, and solar gains.
 #'
 #' @param params A list returned by the \code{\link{get_parameters}} function.
@@ -320,18 +320,18 @@ Q_Gains_Total <- function(params) {
 #' Calculate Building's Heat Transfer Coefficient
 #'
 #' The function applies formula 100 of the SIA 380/1 norm, and aligns with varaible `H`.\cr
-#' `Heat_Transfer_Coefficient` computes the overall heat transfer coefficient of a building. 
-#' This coefficient is a measure of the building's ability to 
-#' transfer heat through its envelope, including both opaque elements (walls, roof, floor) 
-#' and the effect of ventilation. The calculation takes into account the U-values of the 
-#' building elements, their areas, and any adjustment factors, as well as the impact of 
-#' ventilation based on the building's volume and the specific heat capacity of air at the 
+#' `Heat_Transfer_Coefficient` computes the overall heat transfer coefficient of a building.
+#' This coefficient is a measure of the building's ability to
+#' transfer heat through its envelope, including both opaque elements (walls, roof, floor)
+#' and the effect of ventilation. The calculation takes into account the U-values of the
+#' building elements, their areas, and any adjustment factors, as well as the impact of
+#' ventilation based on the building's volume and the specific heat capacity of air at the
 #' building's altitude.
 #'
 #' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
-#' @return Numeric. The overall heat transfer coefficient of the building, expressed in Watts per degree 
-#'   Celsius (W/°C). This value provides a comprehensive measure of the building's thermal 
+#' @return Numeric. The overall heat transfer coefficient of the building, expressed in Watts per degree
+#'   Celsius (W/°C). This value provides a comprehensive measure of the building's thermal
 #'   transmittance, incorporating both conduction through the envelope and convection via ventilation.
 #'
 #' @export
@@ -353,16 +353,16 @@ Heat_Transfer_Coefficient <- function(params) {
 #' Calculate Utilized Monthly Heat Gains
 #'
 #' The function applies formulas 111-115 of the SIA 380/1 norm, and aligns with varaible `Q_ug`.\cr
-#' `Q_Gains_Used` computes the amount of heat gains that are effectively used within the building, 
-#' taking into account the total potential heat gains (from both internal and external sources) 
+#' `Q_Gains_Used` computes the amount of heat gains that are effectively used within the building,
+#' taking into account the total potential heat gains (from both internal and external sources)
 #' and the building's ability to utilize these gains, based on its thermal characteristics.
 #'
 #' @param params A list returned by the \code{\link{get_parameters}} function.
 #'
 #' @return A numeric vector of length 12, representing the utilized heat gains for each month,
-#'   measured in megajoules (MJ) per square meter. The calculation adjusts for the building's 
-#'   thermal response, ensuring that the reported gains are those that effectively contribute 
-#'   to reducing the heating demand. Each element corresponds to one month of the year, 
+#'   measured in megajoules (MJ) per square meter. The calculation adjusts for the building's
+#'   thermal response, ensuring that the reported gains are those that effectively contribute
+#'   to reducing the heating demand. Each element corresponds to one month of the year,
 #'   reflecting the variability of heat gains utilization across different seasons.
 #'
 #' @export
@@ -493,23 +493,24 @@ getEmissions <- function(params) {
 #' @param utilisation_key Mandatory, numeric. Main utilisation of the building according to SIA 380/1:2009.
 #'
 #'   The following utilisations are possible:
-#'   \itemize{
-#'     \item{1: Wohnen Mehrfamilienhaus}
-#'     \item{2: Wohnen Einfamilienhaus}
-#'     \item{3: Büro}
-#'     \item{4: Schulen}
-#'     \item{5: Verkauf}
-#'     \item{6: Restaurants}
-#'     \item{7: Versammlungslokale}
-#'     \item{8: Spitäler}
-#'     \item{9: Industrie}
-#'     \item{10: Lager}
-#'     \item{11: Sportbauten}
-#'     \item{12: Hallenbäder}
-#'   }
+#'
+#' | ID | Name | Description |
+#' | --- | --- | --- |
+#' | 1 | Wohnen Mehrfamilienhaus | Mehrfamilienhäuser, Alterssiedlungen und -wohnungen, Hotels, Mehrfamilien-Ferienhäuser und Ferienheime, Kinder- und Jugendheime, Tagesheime, Behindertenheime, Drogenstationen, Kasernen, Strafanstalten |
+#' | 2 | Wohnen Einfamilienhaus | Ein- und Zweifamilienhäuser, Ein- und ZweifamilienFerienhäuser, Reiheneinfamilienhäuser |
+#' | 3 | Verwaltung | private und öffentliche Bürobauten, Schalterhallen, Arztpraxen, Bibliotheken, Ateliers, Ausstellungsbauten, Kulturzentren, Rechenzentren, Fernmeldegebäude, Fernsehgebäude, Filmstudios |
+#' | 4 | Schulen | Gebäude für Schulen aller Stufen, Kindergärten und - horte, Schulungsräume, Ausbildungszentren, Kongressgebäude, Labors, Forschungsinstitute, Gemeinschaftsräume, Freizeitanlagen |
+#' | 5 | Verkauf | Verkaufsräume aller Art inkl. Einkaufszentren, Messegebäude |
+#' | 6 | Restaurants | Restaurants (inkl. Küchen), Cafeterias, Kantinen, Dancings, Diskotheken |
+#' | 7 | Versammlungslokale | Theater, Konzertsäle, Kinos, Kirchen, Abdankungshallen, Aulas, Sporthallen mit viel Publikum |
+#' | 8 | Spitäler | Spitäler, psychiatrische Kliniken, Krankenheime, Altersheime, Rehabilitationszentren, Behandlungsräume |
+#' | 9 | Industrie | Fabrikationsgebäude, Gewerbebauten, Werkstätten, Servicestationen, Werkhöfe, Bahnhöfe, Feuerwehrgebäude |
+#' | 10 | Lager | Lagerhallen, Verteilzentren |
+#' | 11 | Sportbauten | Turn- und Sporthallen, Gymnastikräume, Tennishallen, Kegelbahnen, Fitnesszentren, Sportgarderoben |
+#' | 12 | Hallenbäder | Hallenbäder, Lehrschwimmbecken, Saunagebäude, Heilbäder |
+#'
 #'   Check the full dataset using \code{utilisation}.
 #' @param climate_code Mandatory, string. Abbreviation code of the assigned climate station according to "Auszug aus Merkblatt SIA 2028:2015".
-#'
 #'   The following climate stations are available:
 #'   \itemize{
 #'     \item{ABO: Adelboden}

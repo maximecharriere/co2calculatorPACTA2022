@@ -10,11 +10,11 @@ Q_Total(params)
 \item{params}{A list returned by the \code{\link{get_parameters}} function.}
 }
 \value{
-A numeric vector of length 12, representing the total heat demand for each month, measured in 
-  megajoules per square meter (MJ/m²). The result reflects the sum of space heating demand and DHW 
-  demand for each month, accounting for seasonal variations in energy requirements.
+A numeric vector of length 12, representing the total heat demand for each month, measured in
+megajoules per square meter (MJ/m²). The result reflects the sum of space heating demand and DHW
+demand for each month, accounting for seasonal variations in energy requirements.
 }
 \description{
-`Q_Total` computes the total monthly heat demand for a building, combining both the heating demand 
+\code{Q_Total} computes the total monthly heat demand for a building, combining both the heating demand
 for space heating and the domestic hot water (DHW) demand.
 }

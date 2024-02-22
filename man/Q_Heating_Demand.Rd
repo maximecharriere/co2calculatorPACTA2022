@@ -11,13 +11,13 @@ Q_Heating_Demand(params)
 }
 \value{
 A numeric vector of length 12, representing the net heating energy demand
-  for each month, measured in megajoules (MJ) per square meter. Each element of
-  the vector corresponds to one month of the year, providing a detailed view of
-  the heating demand's seasonal variation.
+for each month, measured in megajoules (MJ) per square meter. Each element of
+the vector corresponds to one month of the year, providing a detailed view of
+the heating demand's seasonal variation.
 }
 \description{
-The function applies formula 117 of the SIA 380/1 norm, and aligns with varaible `Q_h`.\cr
-`Q_Heating_Demand` computes the net energy demand for heating on a monthly basis,
+The function applies formula 117 of the SIA 380/1 norm, and aligns with varaible \code{Q_h}.\cr
+\code{Q_Heating_Demand} computes the net energy demand for heating on a monthly basis,
 per square meter of the building.
 This function calculates the heating demand by assessing the
 difference between total heat losses and gains. It utilizes \code{\link{Q_Losses_Total}}

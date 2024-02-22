@@ -21,135 +21,136 @@ calculate_emissions(
 \arguments{
 \item{area}{Mandatory, numeric. Area (in square meters) where heating or cooling is required ("Energiebezugsfläche").
 \itemize{
-  \item{e.g. 1000}
+\item{e.g. 1000}
 }}
 
 \item{floors}{Mandatory, numeric. Number of floors within the building envelope ("thermische Gebäudehülle").
 \itemize{
-  \item{e.g. 4}
+\item{e.g. 4}
 }}
 
 \item{year}{Mandatory, numeric. Year of building construction.
 \itemize{
-  \item{e.g. 1981}
+\item{e.g. 1981}
 }}
 
 \item{utilisation_key}{Mandatory, numeric. Main utilisation of the building according to SIA 380/1:2009.
 
-  The following utilisations are possible:
-  \itemize{
-    \item{1: Wohnen Mehrfamilienhaus}
-    \item{2: Wohnen Einfamilienhaus}
-    \item{3: Büro}
-    \item{4: Schulen}
-    \item{5: Verkauf}
-    \item{6: Restaurants}
-    \item{7: Versammlungslokale}
-    \item{8: Spitäler}
-    \item{9: Industrie}
-    \item{10: Lager}
-    \item{11: Sportbauten}
-    \item{12: Hallenbäder}
-  }
-  Check the full dataset using \code{utilisation}.}
+The following utilisations are possible:\tabular{lll}{
+   ID \tab Name \tab Description \cr
+   1 \tab Wohnen Mehrfamilienhaus \tab Mehrfamilienhäuser, Alterssiedlungen und -wohnungen, Hotels, Mehrfamilien-Ferienhäuser und Ferienheime, Kinder- und Jugendheime, Tagesheime, Behindertenheime, Drogenstationen, Kasernen, Strafanstalten \cr
+   2 \tab Wohnen Einfamilienhaus \tab Ein- und Zweifamilienhäuser, Ein- und ZweifamilienFerienhäuser, Reiheneinfamilienhäuser \cr
+   3 \tab Verwaltung \tab private und öffentliche Bürobauten, Schalterhallen, Arztpraxen, Bibliotheken, Ateliers, Ausstellungsbauten, Kulturzentren, Rechenzentren, Fernmeldegebäude, Fernsehgebäude, Filmstudios \cr
+   4 \tab Schulen \tab Gebäude für Schulen aller Stufen, Kindergärten und - horte, Schulungsräume, Ausbildungszentren, Kongressgebäude, Labors, Forschungsinstitute, Gemeinschaftsräume, Freizeitanlagen \cr
+   5 \tab Verkauf \tab Verkaufsräume aller Art inkl. Einkaufszentren, Messegebäude \cr
+   6 \tab Restaurants \tab Restaurants (inkl. Küchen), Cafeterias, Kantinen, Dancings, Diskotheken \cr
+   7 \tab Versammlungslokale \tab Theater, Konzertsäle, Kinos, Kirchen, Abdankungshallen, Aulas, Sporthallen mit viel Publikum \cr
+   8 \tab Spitäler \tab Spitäler, psychiatrische Kliniken, Krankenheime, Altersheime, Rehabilitationszentren, Behandlungsräume \cr
+   9 \tab Industrie \tab Fabrikationsgebäude, Gewerbebauten, Werkstätten, Servicestationen, Werkhöfe, Bahnhöfe, Feuerwehrgebäude \cr
+   10 \tab Lager \tab Lagerhallen, Verteilzentren \cr
+   11 \tab Sportbauten \tab Turn- und Sporthallen, Gymnastikräume, Tennishallen, Kegelbahnen, Fitnesszentren, Sportgarderoben \cr
+   12 \tab Hallenbäder \tab Hallenbäder, Lehrschwimmbecken, Saunagebäude, Heilbäder \cr
+}
+
+
+Check the full dataset using \code{utilisation}.}
 
 \item{climate_code}{Mandatory, string. Abbreviation code of the assigned climate station according to "Auszug aus Merkblatt SIA 2028:2015".
-
-  The following climate stations are available:
-  \itemize{
-    \item{ABO: Adelboden}
-    \item{AIG: Aigle}
-    \item{ALT: Altdorf}
-    \item{BAS: Basel-Binningen}
-    \item{BER: Bern-Liebefeld}
-    \item{BUS: Buchs-Aarau}
-    \item{CDF: La Chaux-de-Fonds}
-    \item{CHU: Chur}
-    \item{DAV: Davos}
-    \item{DIS: Disentis}
-    \item{ENG: Engelberg}
-    \item{FRE: La Frétaz}
-    \item{GLA: Glarus}
-    \item{GSB: Grand-St-Bernard}
-    \item{GUT: Güttingen}
-    \item{GVE: Genève-Cointrin}
-    \item{INT: Interlaken}
-    \item{KLO: Zürich-Kloten}
-    \item{LUG: Lugano}
-    \item{LUZ: Luzern}
-    \item{MAG: Magadino}
-    \item{MVE: Montana}
-    \item{NEU: Neuchâtel}
-    \item{OTL: Locarno-Monti}
-    \item{PAY: Payerne}
-    \item{PIO: Piotta}
-    \item{PUY: Pully}
-    \item{ROB: Robbia}
-    \item{RUE: Rünenberg}
-    \item{SAM: Samedan}
-    \item{SBE: San Bernardino}
-    \item{SCU: Scuol}
-    \item{SHA: Schaffhausen}
-    \item{SIO: Sion}
-    \item{SMA: Zürich-MeteoSchweiz}
-    \item{STG: St. Gallen}
-    \item{ULR: Ulrichen}
-    \item{VAD: Vaduz}
-    \item{WYN: Wynau}
-    \item{ZER: Zermatt}
-  }
-  Check the full dataset using \code{climate}.}
+The following climate stations are available:
+\itemize{
+\item{ABO: Adelboden}
+\item{AIG: Aigle}
+\item{ALT: Altdorf}
+\item{BAS: Basel-Binningen}
+\item{BER: Bern-Liebefeld}
+\item{BUS: Buchs-Aarau}
+\item{CDF: La Chaux-de-Fonds}
+\item{CHU: Chur}
+\item{DAV: Davos}
+\item{DIS: Disentis}
+\item{ENG: Engelberg}
+\item{FRE: La Frétaz}
+\item{GLA: Glarus}
+\item{GSB: Grand-St-Bernard}
+\item{GUT: Güttingen}
+\item{GVE: Genève-Cointrin}
+\item{INT: Interlaken}
+\item{KLO: Zürich-Kloten}
+\item{LUG: Lugano}
+\item{LUZ: Luzern}
+\item{MAG: Magadino}
+\item{MVE: Montana}
+\item{NEU: Neuchâtel}
+\item{OTL: Locarno-Monti}
+\item{PAY: Payerne}
+\item{PIO: Piotta}
+\item{PUY: Pully}
+\item{ROB: Robbia}
+\item{RUE: Rünenberg}
+\item{SAM: Samedan}
+\item{SBE: San Bernardino}
+\item{SCU: Scuol}
+\item{SHA: Schaffhausen}
+\item{SIO: Sion}
+\item{SMA: Zürich-MeteoSchweiz}
+\item{STG: St. Gallen}
+\item{ULR: Ulrichen}
+\item{VAD: Vaduz}
+\item{WYN: Wynau}
+\item{ZER: Zermatt}
+}
+Check the full dataset using \code{climate}.}
 
 \item{energy_carrier}{Mandatory, string. Energy carrier used for heating and domestic hot water production.
 
-  The following energy carriers are available:
-  \itemize{
-    \item{oilHeating}
-    \item{gasHeating}
-    \item{other}
-  }}
+The following energy carriers are available:
+\itemize{
+\item{oilHeating}
+\item{gasHeating}
+\item{other}
+}}
 
 \item{walls_refurb_year}{Optional, numeric, default value \code{NULL}. Year of wall refurbishment.
 \itemize{
-  \item{e.g. 2010}
+\item{e.g. 2010}
 }
 Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.}
 
 \item{roof_refurb_year}{Optional, numeric, default value \code{NULL}. Year of roof refurbishment.
 \itemize{
-  \item{e.g. 2010}
+\item{e.g. 2010}
 }
 Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.}
 
 \item{windows_refurb_year}{Optional, numeric, default value \code{NULL}. Year of window refurbishment.
 \itemize{
-  \item{e.g. 2010}
+\item{e.g. 2010}
 }
 Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.}
 
 \item{floor_refurb_year}{Optional, numeric, default value \code{NULL}. Year of basement floor refurbishment.
 \itemize{
-  \item{e.g. 2010}
+\item{e.g. 2010}
 }
 Supply \code{NULL} or \code{NA} if no refurbishment has taken place since the year of building construction.}
 
 \item{heating_install_year}{Optional, numeric, default value \code{NULL}. Year of heating installation.
 \itemize{
-  \item{e.g. 2010}
+\item{e.g. 2010}
 }
 Supply \code{NULL} or \code{NA} if no heating replacement has taken place since the year of building construction.}
 }
 \value{
 \code{calculate_emissions} returns a list \code{r} containing the calculation results:
-  \itemize{
-    \item{r$heatEnergy: annual heat energy required per area, in MJ/m2 per year}
-    \item{r$emissionCoefficient: applied CO2 emission coefficient according to the given energy carrier, in kg/MJ}
-    \item{r$emissionsPerArea: annual CO2 emissions per area, in kg/m2 per year}
-    \item{r$emissionsTotal: total annual CO2 emissions, in kg per year}
-  }
+\itemize{
+\item{r$heatEnergy: annual heat energy required per area, in MJ/m2 per year}
+\item{r$emissionCoefficient: applied CO2 emission coefficient according to the given energy carrier, in kg/MJ}
+\item{r$emissionsPerArea: annual CO2 emissions per area, in kg/m2 per year}
+\item{r$emissionsTotal: total annual CO2 emissions, in kg per year}
+}
 }
 \description{
-`calculate_emissions` calculates the CO2 emissions of a building according to the input arguments described below.
+\code{calculate_emissions} calculates the CO2 emissions of a building according to the input arguments described below.
 }
 \examples{
 # Example 1:

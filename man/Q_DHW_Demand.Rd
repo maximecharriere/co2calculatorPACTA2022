@@ -11,11 +11,11 @@ Q_DHW_Demand(params)
 }
 \value{
 A numeric vector of length 12, representing the monthly energy demand
-  for DHW per square meter, measured in megajoules (MJ). Each element of the
-  vector corresponds to one month of the year.
+for DHW per square meter, measured in megajoules (MJ). Each element of the
+vector corresponds to one month of the year.
 }
 \description{
-`Q_DHW_Demand` estimates the monthly energy required for Domestic Hot Water (DHW)
+\code{Q_DHW_Demand} estimates the monthly energy required for Domestic Hot Water (DHW)
 per square meter of the building. The function calculates this demand based on
 the daily DHW demand specific to the building type.
 }

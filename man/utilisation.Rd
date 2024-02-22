@@ -7,19 +7,19 @@
 \format{
 A list with 12 elements, each element containing the parameters of the respective utilisation:
 \itemize{
-  \item{key}
-  \item{name}
-  \item{temperature}
-  \item{personArea}
-  \item{personHeat}
-  \item{personPresence}
-  \item{electricityUse}
-  \item{electricityUseFactor}
-  \item{ventilationRate}
-  \item{dhwDemand}
-  \item{temperatureAddition}
-  \item{heatgainsFactor}
-  \item{heatgainsTime}
+\item{key}
+\item{name}
+\item{temperature}
+\item{personArea}
+\item{personHeat}
+\item{personPresence}
+\item{electricityUse}
+\item{electricityUseFactor}
+\item{ventilationRate}
+\item{dhwDemand}
+\item{temperatureAddition}
+\item{heatgainsFactor}
+\item{heatgainsTime}
 }
 }
 \source{

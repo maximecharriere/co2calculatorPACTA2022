@@ -11,12 +11,12 @@ Q_Losses_Ventilation(params)
 }
 \value{
 A numeric vector of length 12, representing the ventilation heat losses for each month,
-  expressed in MJ/m2. Negative loss values are automatically set to 0 to ensure that all output values
-  represent actual heat losses.
+expressed in MJ/m2. Negative loss values are automatically set to 0 to ensure that all output values
+represent actual heat losses.
 }
 \description{
-The function applies formulas 97-98 of the SIA 380/1 norm, and aligns with varaible `Q_V`. \cr
-`Q_Losses_Ventilation` calculates the heat losses due to ventilation for each month,
+The function applies formulas 97-98 of the SIA 380/1 norm, and aligns with varaible \code{Q_V}. \cr
+\code{Q_Losses_Ventilation} calculates the heat losses due to ventilation for each month,
 expressed in megajoules per square meter (MJ/m2). It takes into account the difference between indoor and outdoor temperatures,
 the building's ventilation rate, and the specific heat capacity of air at a given altitude.
 }
