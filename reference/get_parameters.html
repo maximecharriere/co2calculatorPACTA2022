@@ -77,114 +77,8 @@ correctly formatted, and it collects information about any refurbishments that h
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>area</dt>
-<dd><p>Mandatory, numeric. Area (in square meters) where heating or cooling is required ("Energiebezugsfläche").</p><ul><li><p>e.g. 1000</p></li>
-</ul></dd>
-
-
-<dt>floors</dt>
-<dd><p>Mandatory, numeric. Number of floors within the building envelope ("thermische Gebäudehülle").</p><ul><li><p>e.g. 4</p></li>
-</ul></dd>
-
-
-<dt>year</dt>
-<dd><p>Mandatory, numeric. Year of building construction.</p><ul><li><p>e.g. 1981</p></li>
-</ul></dd>
-
-
-<dt>utilisation_key</dt>
-<dd><p>Mandatory, numeric. Main utilisation of the building according to SIA 380/1:2009.</p>
-<p>The following utilisations are possible:</p><ul><li><p>1: Wohnen Mehrfamilienhaus</p></li>
-<li><p>2: Wohnen Einfamilienhaus</p></li>
-<li><p>3: Büro</p></li>
-<li><p>4: Schulen</p></li>
-<li><p>5: Verkauf</p></li>
-<li><p>6: Restaurants</p></li>
-<li><p>7: Versammlungslokale</p></li>
-<li><p>8: Spitäler</p></li>
-<li><p>9: Industrie</p></li>
-<li><p>10: Lager</p></li>
-<li><p>11: Sportbauten</p></li>
-<li><p>12: Hallenbäder</p></li>
-</ul><p>Check the full dataset using <code>utilisation</code>.</p></dd>
-
-
-<dt>climate_code</dt>
-<dd><p>Mandatory, string. Abbreviation code of the assigned climate station according to "Auszug aus Merkblatt SIA 2028:2015".</p>
-<p>The following climate stations are available:</p><ul><li><p>ABO: Adelboden</p></li>
-<li><p>AIG: Aigle</p></li>
-<li><p>ALT: Altdorf</p></li>
-<li><p>BAS: Basel-Binningen</p></li>
-<li><p>BER: Bern-Liebefeld</p></li>
-<li><p>BUS: Buchs-Aarau</p></li>
-<li><p>CDF: La Chaux-de-Fonds</p></li>
-<li><p>CHU: Chur</p></li>
-<li><p>DAV: Davos</p></li>
-<li><p>DIS: Disentis</p></li>
-<li><p>ENG: Engelberg</p></li>
-<li><p>FRE: La Frétaz</p></li>
-<li><p>GLA: Glarus</p></li>
-<li><p>GSB: Grand-St-Bernard</p></li>
-<li><p>GUT: Güttingen</p></li>
-<li><p>GVE: Genève-Cointrin</p></li>
-<li><p>INT: Interlaken</p></li>
-<li><p>KLO: Zürich-Kloten</p></li>
-<li><p>LUG: Lugano</p></li>
-<li><p>LUZ: Luzern</p></li>
-<li><p>MAG: Magadino</p></li>
-<li><p>MVE: Montana</p></li>
-<li><p>NEU: Neuchâtel</p></li>
-<li><p>OTL: Locarno-Monti</p></li>
-<li><p>PAY: Payerne</p></li>
-<li><p>PIO: Piotta</p></li>
-<li><p>PUY: Pully</p></li>
-<li><p>ROB: Robbia</p></li>
-<li><p>RUE: Rünenberg</p></li>
-<li><p>SAM: Samedan</p></li>
-<li><p>SBE: San Bernardino</p></li>
-<li><p>SCU: Scuol</p></li>
-<li><p>SHA: Schaffhausen</p></li>
-<li><p>SIO: Sion</p></li>
-<li><p>SMA: Zürich-MeteoSchweiz</p></li>
-<li><p>STG: St. Gallen</p></li>
-<li><p>ULR: Ulrichen</p></li>
-<li><p>VAD: Vaduz</p></li>
-<li><p>WYN: Wynau</p></li>
-<li><p>ZER: Zermatt</p></li>
-</ul><p>Check the full dataset using <code>climate</code>.</p></dd>
-
-
-<dt>energy_carrier</dt>
-<dd><p>Mandatory, string. Energy carrier used for heating and domestic hot water production.</p>
-<p>The following energy carriers are available:</p><ul><li><p>oilHeating</p></li>
-<li><p>gasHeating</p></li>
-<li><p>other</p></li>
-</ul></dd>
-
-
-<dt>walls_refurb_year</dt>
-<dd><p>Optional, numeric, default value <code>NULL</code>. Year of wall refurbishment.</p><ul><li><p>e.g. 2010</p></li>
-</ul><p>Supply <code>NULL</code> or <code>NA</code> if no refurbishment has taken place since the year of building construction.</p></dd>
-
-
-<dt>roof_refurb_year</dt>
-<dd><p>Optional, numeric, default value <code>NULL</code>. Year of roof refurbishment.</p><ul><li><p>e.g. 2010</p></li>
-</ul><p>Supply <code>NULL</code> or <code>NA</code> if no refurbishment has taken place since the year of building construction.</p></dd>
-
-
-<dt>windows_refurb_year</dt>
-<dd><p>Optional, numeric, default value <code>NULL</code>. Year of window refurbishment.</p><ul><li><p>e.g. 2010</p></li>
-</ul><p>Supply <code>NULL</code> or <code>NA</code> if no refurbishment has taken place since the year of building construction.</p></dd>
-
-
-<dt>floor_refurb_year</dt>
-<dd><p>Optional, numeric, default value <code>NULL</code>. Year of basement floor refurbishment.</p><ul><li><p>e.g. 2010</p></li>
-</ul><p>Supply <code>NULL</code> or <code>NA</code> if no refurbishment has taken place since the year of building construction.</p></dd>
-
-
-<dt>heating_install_year</dt>
-<dd><p>Optional, numeric, default value <code>NULL</code>. Year of heating installation.</p><ul><li><p>e.g. 2010</p></li>
-</ul><p>Supply <code>NULL</code> or <code>NA</code> if no heating replacement has taken place since the year of building construction.</p></dd>
+    <dl><dt>params</dt>
+<dd><p>See <code><a href="calculate_emissions.html">calculate_emissions</a></code> for details on the parameters.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -192,24 +86,9 @@ correctly formatted, and it collects information about any refurbishments that h
     
 
 <p>A list containing all validated and formatted input parameters, including any
-  refurbishment details.</p>
+refurbishment details.</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">params</span> <span class="op">&lt;-</span> <span class="fu">get_parameters</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  area <span class="op">=</span> <span class="fl">1000</span>,</span></span>
-<span class="r-in"><span>  floors <span class="op">=</span> <span class="fl">5</span>,</span></span>
-<span class="r-in"><span>  year <span class="op">=</span> <span class="fl">1980</span>,</span></span>
-<span class="r-in"><span>  utilisation_key <span class="op">=</span> <span class="fl">3</span>,</span></span>
-<span class="r-in"><span>  climate_code <span class="op">=</span> <span class="st">"ZER"</span>,</span></span>
-<span class="r-in"><span>  energy_carrier <span class="op">=</span> <span class="st">"gasHeating"</span>,</span></span>
-<span class="r-in"><span>  walls_refurb_year <span class="op">=</span> <span class="fl">2010</span>,</span></span>
-<span class="r-in"><span>  roof_refurb_year <span class="op">=</span> <span class="fl">2015</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 
