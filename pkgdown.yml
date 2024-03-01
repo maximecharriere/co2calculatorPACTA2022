@@ -1,10 +1,10 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   co2calculatorPACTA2022: co2calculatorPACTA2022.html
   explanations: explanations.html
-last_built: 2024-02-26T12:00Z
+last_built: 2024-03-01T16:18Z
 urls:
   reference: https://maximecharriere.github.io/co2calculatorPACTA2022/reference
   article: https://maximecharriere.github.io/co2calculatorPACTA2022/articles
