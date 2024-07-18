@@ -445,8 +445,8 @@ getEmissions <- function(params) {
     params$yearInstalledHeating <- currentYear - heatingAge
   }
 
-  # heating efficiency (only applies to oilHeating and gasHeating)
-  if (params$energy_carrier %in% c("oilHeating", "gasHeating")) {
+  # heating efficiency (only applies to oilHeating, gasHeating and undefined)
+  if (params$energy_carrier %in% c("oilHeating", "gasHeating", "undefined")) {
     if (params$yearInstalledHeating < 1991) {
       efficiencyCoefficent <- energyCarrier$efficiencyCoefficient$`<1991`
     } else if (params$yearInstalledHeating < 1995) {
@@ -561,6 +561,7 @@ getEmissions <- function(params) {
 #'   \itemize{
 #'     \item{oilHeating}
 #'     \item{gasHeating}
+#'     \item{undefined}
 #'     \item{other}
 #'   }
 #' @param walls_refurb_year Optional, numeric, default value \code{NULL}. Year of wall refurbishment.

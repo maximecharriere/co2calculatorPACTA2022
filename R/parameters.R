@@ -281,7 +281,7 @@ get_parameters <- function(area, floors, year, utilisation_key, climate_code, en
     stop("Mandatory parameter 'energy_carrier' is NULL")
   } else if (is.na(energy_carrier)) {
     stop("Mandatory parameter 'energy_carrier' is NA")
-  } else if (is.character(energy_carrier) & energy_carrier %in% c("oilHeating", "gasHeating", "other")) {
+  } else if (is.character(energy_carrier) & energy_carrier %in% c("oilHeating", "gasHeating", "other", "undefined")) {
     input_args$energy_carrier <- energy_carrier
   } else {
     stop(paste("Invalid parameter 'energy_carrier' -->", energy_carrier))

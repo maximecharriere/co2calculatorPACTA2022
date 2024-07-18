@@ -53,6 +53,7 @@
 #'   \item{buildingGenerator}
 #'   \item{oilHeating}
 #'   \item{gasHeating}
+#'   \item{undefined}
 #'   \item{other}
 #'   \item{dhw_systems}
 #'   \item{heating_distribution_systems}

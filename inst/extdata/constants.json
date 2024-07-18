@@ -27,6 +27,16 @@
       ">2009": 0.94
     }
   },
+  "undefined": {
+    "ghgEmissionsPerMJth": 0.0444,
+    "efficiencyCoefficient": {
+      "<1991": 0.83,
+      "1991-1994": 0.85,
+      "1995-1999": 0.87,
+      "2000-2009": 0.89,
+      ">2009": 0.93
+    }
+  },
   "other": {
     "ghgEmissionsPerMJth": 0
   },
