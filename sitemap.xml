@@ -1,90 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/404.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/articles/co2calculatorPACTA2022.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/articles/explanations.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/index.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Heat_Transfer_Coefficient.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_DHW_Demand.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_BodyHeat.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_Electricity.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_Solar.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_Total.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_Used.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Heating_Demand.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Losses_Total.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Losses_Transmission.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Losses_Ventilation.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Total.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/calculateTransmissionLosses.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/calculate_emissions.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/climate.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/constants.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/getEmissions.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/get_parameters.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/simpleOpaqueElements.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/simpleWindowElements.html</loc>
-  </url>
-  <url>
-    <loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/utilisation.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/404.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/LICENSE-text.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/articles/co2calculatorPACTA2022.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/articles/explanations.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/articles/index.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/authors.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/index.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Heat_Transfer_Coefficient.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_DHW_Demand.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_BodyHeat.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_Electricity.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_Solar.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_Total.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Gains_Used.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Heating_Demand.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Losses_Total.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Losses_Transmission.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Losses_Ventilation.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/Q_Total.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/calculateTransmissionLosses.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/calculate_emissions.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/climate.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/constants.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/getEmissions.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/get_parameters.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/index.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/simpleOpaqueElements.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/simpleWindowElements.html</loc></url>
+<url><loc>https://maximecharriere.github.io/co2calculatorPACTA2022/reference/utilisation.html</loc></url>
 </urlset>
+
