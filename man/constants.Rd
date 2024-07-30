@@ -10,6 +10,7 @@ A list with 10 elements, each element containing the parameters of the respectiv
 \item{buildingGenerator}
 \item{oilHeating}
 \item{gasHeating}
+\item{undefined}
 \item{other}
 \item{dhw_systems}
 \item{heating_distribution_systems}

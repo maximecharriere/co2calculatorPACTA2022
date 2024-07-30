@@ -107,6 +107,7 @@ The following energy carriers are available:
 \itemize{
 \item{oilHeating}
 \item{gasHeating}
+\item{undefined}
 \item{other}
 }}
 
